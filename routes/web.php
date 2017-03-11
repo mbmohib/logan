@@ -30,13 +30,16 @@ Route::get('/book', function() {
     $book = new \App\Book;
     $book->title = 'Pandas';
     $book->pub_year = 2015;
-
     $book->category()->associate($category);
     $book->language()->associate($language);
-
     $book->save();
 
-    $book->user()->save($user);
+    $author = new \App\Author;
+    $author->name = "Dayle Rees";
+    $author->save();
+
+    $book->users()->save($user);
+    $book->authors()->save($author);
 
     return "Successful";
 
