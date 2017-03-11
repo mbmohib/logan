@@ -18,6 +18,8 @@ Route::get('/cat-lang', function() {
     $language->name = "English";
     $language->save();
 
+    return "Successful";
+
 });
 
 Route::get('/book', function() {
@@ -31,8 +33,11 @@ Route::get('/book', function() {
 
     $book->category()->associate($category);
     $book->language()->associate($language);
-    $book->user()->associate($user);
 
     $book->save();
+
+    $book->user()->save($user);
+
+    return "Successful";
 
 });
