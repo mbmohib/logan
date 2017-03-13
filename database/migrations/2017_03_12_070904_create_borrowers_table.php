@@ -17,12 +17,13 @@ class CreateBorrowersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('mobile');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->date('lend_date');
             $table->date('return_date');
             $table->boolean('status');
             $table->timestamps();
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('book_borrower', function (Blueprint $table) {
