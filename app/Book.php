@@ -17,6 +17,11 @@ class Book extends Model
         return $this->belongsToMany(Author::class);
     }
 
+    public function borrowers()
+    {
+        return $this->belongsToMany(Borrower::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -25,5 +30,15 @@ class Book extends Model
     public function language()
     {
         return $this->belongsTo(Language::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function purchaseDates()
+    {
+        return $this->hasMany(PurchaseDate::class);
     }
 }

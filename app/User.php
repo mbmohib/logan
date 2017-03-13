@@ -31,4 +31,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Book::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function purchaseDates()
+    {
+        return $this->hasMany(PurchaseDate::class);
+    }
 }

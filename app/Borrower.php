@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PurchaseDate extends Model
+class Borrower extends Model
 {
-    public function book()
+    public function books()
     {
-        return $this->belongsTo(Book::class);
+        return $this->belongsToMany(Book::class);
     }
 
     public function user()

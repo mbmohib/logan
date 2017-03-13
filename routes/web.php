@@ -9,38 +9,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/cat-lang', function() {
-    $category = new \App\Category;
-    $category->name = "Framework";
-    $category->save();
-
-    $language = new \App\Language;
-    $language->name = "English";
-    $language->save();
-
-    return "Successful";
-
-});
-
-Route::get('/book', function() {
-    $category = \App\Category::first();
-    $language = \App\Language::first();
-    $user = \App\User::first();
-
-    $book = new \App\Book;
-    $book->title = 'Pandas';
-    $book->pub_year = 2015;
-    $book->category()->associate($category);
-    $book->language()->associate($language);
-    $book->save();
-
-    $author = new \App\Author;
-    $author->name = "Dayle Rees";
-    $author->save();
-
-    $book->users()->save($user);
-    $book->authors()->save($author);
-
-    return "Successful";
-
+Route::get('/test', function() {
+    $borrowers = App\Borrower::where('user_id', 3)->get();
+    return $borrowers;
 });
