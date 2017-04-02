@@ -1,95 +1,214 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.master')
 
-        <title>Laravel</title>
+@section('title', 'Welcome')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('stylesheet')
+	@parent
+@endsection
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+@section('content')
 
-            .full-height {
-                height: 100vh;
-            }
+<!--main content -->
+<div class="pusher">
+	<div id="home" class="ui vertical aligned center segment inverted header_bannar">
+		<div class="ui container">
+			<div class="ui secondary inverted top large pointing menu">
+				<div class="left item">
+					<a href="#">
+						{{-- <i class="sidebar icon tablet"></i> --}}
+					</a>
+					<a href="#" class="logo">
+						<img src="/images/logo.png" alt="">
+						<span>BookShelf</span>
+					</a>
+				</div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+				<div class="right item">
+					<a href="/" class="active item">Home</a>
+					<a href="#process" class="item">Process</a>
+					<a href="#login" class="item">Login</a>
+					<a href="#signup" class="item">Registration</a>
+				</div>
+			</div>
+		</div>
 
-            .position-ref {
-                position: relative;
-            }
+		<div class="bannar_info wow fadeIn">
+			<div class="ui grid">
+				<div class="five wide right floated column">
+					<h1 class="ui header inverted">Store your BOOK!</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco,
+						laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+						Excepteur sint occaecat cupidatat non proident,
+						sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+			</div>
+		</div>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+	</div> <!--header_bannar end -->
 
-            .content {
-                text-align: center;
-            }
+	<section id="process" class="process">
+		<h1 class="ui header centered horizontal divider">PROCESS</h1>
+		<div class="ui equal width column center aligned grid very relaxed container wow fadeInUp">
+			<div class="column">
+				<i class="sign in icon"></i>
+				<span>Registration</span>
+				<p>
+					lorem ipsum dolar sitsed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua.
+					Ut enim ad minim veniam, quis nostrud exer
+				</p>
+			</div>
+			<div class="column">
+				<i class="book icon"></i>
+				<span>Add Book</span>
+				<p>
+					lorem ipsum dolar sitsed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua.
+					Ut enim ad minim veniam, quis nostrud exer
+				</p>
+			</div>
+			<div class="column">
+				<i class="add user icon"></i>
+				<span>Add Borrower</span>
+				<p>
+					lorem ipsum dolar sitsed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua.
+					Ut enim ad minim veniam, quis nostrud exer
+				</p>
+			</div>
+		</div>
+	</section>
 
-            .title {
-                font-size: 84px;
-            }
+	<section id="login" class="login">
+		<h1 class="ui header inverted centered horizontal divider">Sign In</h1>
+		<div class="ui grid basic segment">
+			<div class="eight wide centered column">
+				<div class="ui form">
+					<div class="field wow slideInLeft">
+						<div class="ui left icon input">
+							<input type="text" placeholder="Username">
+							<i class="user icon"></i>
+						</div>
+					</div>
+					<div class="field wow slideInRight">
+						<div class="ui left icon input">
+						<input type="password" placeholder="Password">
+						<i class="lock icon"></i>
+						</div>
+					</div>
+					<div class="inline field  wow fadeIn">
+						<div class="ui checkbox">
+							<input id="remember" type="checkbox">
+							<label for="remember"> Remember me </label>
+						</div>
+					</div>
+					<div class="ui teal submit button wow fadeIn"> Sign In </div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+	<section id="signup" class="signup">
+		<h1 class="ui header centered horizontal divider">Registration</h1>
+		<div class="ui grid basic segment">
+			<div class="eight wide centered column">
+				<div class="ui form">
+					<div class="field wow slideInLeft">
+						<label> Name </label>
+						<div class="ui left icon input">
+							<input placeholder="Bruce Wayne" type="text">
+							<i class="user icon"></i>
+							<div class="ui corner label">
+								<i class="asterisk icon"></i>
+							</div>
+						</div>
+					</div>
+					<div class="two fields wow slideInRight">
+						<div class="field">
+							<label> Username </label>
+							<div class="ui left icon input">
+								<input id="username" placeholder="Batman" type="text">
+								<i class="user icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk icon"></i>
+								</div>
+							</div>
+						</div>
+						<div class="field">
+							<label> Email </label>
+							<div class="ui left icon input">
+								<input id="email" placeholder="batman@batcave.com" type="text">
+								<i class="mail icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk icon"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="two fields  wow slideInLeft">
+						<div class="field">
+							<label> Password </label>
+							<div class="ui left icon input">
+								<input id="password" placeholder="e.g., !@#$%^&amp;*()_+:)" type="password">
+								<i class="lock icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk icon"></i>
+								</div>
+							</div>
+						</div>
+						<div class="field">
+							<label> Confirm Password </label>
+							<div class="ui left icon input">
+								<input id="confirm-password" placeholder="e.g., !@#$%^&amp;*()_+:)" type="password">
+								<i class="lock icon"></i>
+								<div class="ui corner label">
+									<i class="asterisk icon"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui teal submit button wow fadeIn"> Sign Up </div>
+					<div class="ui error message"></div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+	<section class="footer">
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+		<div class="ui centered grid wow slideInUp">
+			<div class="row">
+				<div class="five wide column">
+					<div class="ui form">
+						<div class="field">
+							<div class="ui action input">
+								<input type="email" placeholder="batman@batcave.com">
+								<button class="ui teal right labeled icon button">
+									<i class="announcement icon"></i>
+									Tell Your Friends
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+			<div class="copyright">
+				<a href="#">&copy; Maruf, Mohib, Momit</a>
+			</div>
+
+		</div>
+
+		<a class="up-arrow" href="#home"><i class="arrow circle up icon"></i></a>
+
+	</section>
+</div>
+
+@endsection
+
+@section('javascript')
+	@parent
+@endsection
