@@ -15,7 +15,7 @@
 
        <div class="side_menu_nav_header ui grid">
            <div class="column">
-               <p>main navigation</p>
+               <p><a class="item" href="/dashboard">Dashboard</a></p>
            </div>
        </div>
 

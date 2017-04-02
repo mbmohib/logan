@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Spirax');
 .header {
 	font-family: 'Spirax', cursive !important;
+    margin-top: 50px !important;
 }
 .logo {
     background: #367FA9;
@@ -18,23 +19,30 @@
 .side_menu_nav_header {
     padding: 0px 15px !important;
     background: #1A2226;
-    height: 40px;
-    color: #4b646f;
-    text-transform: uppercase;
-    font-size: 14px;
-}
+    height: 80px;
 
+}
+.side_menu_nav_header p a {
+    color: #4b646f !important;
+    text-transform: uppercase !important;
+    font-size: 18px;
+}
 .logan-header {
     color: #fff !important;
     background: #3C8DBC;
 }
 .dashboard_title {
-    padding-top: 10px !important;
+    padding-top: 18px !important;
     font-family: 'Spirax', cursive;
     font-size: 22px;
 }
-.dashboard_title span a {
+.dashboard_title a span {
     color: #fff;
+}
+.dashboard_title a img {
+    margin-left: 1em;
+    width: 1.3em !important;
+    height: 1.3em !important;
 }
 #toggle {
     color : #000;
@@ -52,10 +60,17 @@
 .books-list {
 	margin-top: 80px !important;
 }
-.book-search {
+.book-search input{
 	margin-top: 10px !important;
+}
+.book-search-icon {
+    margin-top: 5px !important;
 }
 .book-search input {
     background: #22516D !important;
+    color: #fff !important;
+}
+.signout {
+    font-size: 18px;
     color: #fff !important;
 }

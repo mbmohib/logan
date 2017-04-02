@@ -3,7 +3,7 @@
     <div class="header"><h1>Profile</h1></div>
     <div class="menu">
       <a class="item" href="/dashboard/edit-profile">Edit Profile</a>
-      <a class="item">Change Password</a>
+      <a class="item" href="/dashboard/change-password">Change Password</a>
     </div>
   </div>
   <div class="item">

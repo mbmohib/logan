@@ -16,6 +16,14 @@ Route::group(['prefix' => 'dashboard'], function () {
         return view('admin.dashboard');
     });
 
+	Route::get('/edit-profile', function ()    {
+        return view('admin.admin-edit-profile');
+    });
+
+    Route::get('/change-password', function ()    {
+        return view('admin.admin-change-password');
+    });
+
     Route::get('/add-book', function ()    {
         return view('admin.admin-add-book');
     });
