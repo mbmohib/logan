@@ -24,9 +24,9 @@ Route::group(['prefix' => 'dashboard'], function () {
         return view('admin.admin-change-password');
     });
 
-    Route::get('/add-book', function ()    {
-        return view('admin.admin-add-book');
-    });
+    Route::get('/add-book', 'BookController@create')->name('add-book');
+
+    Route::post('/add-book', 'BookController@store')->name('store-book');
 
     Route::get('/books', function ()    {
         return view('admin.admin-books-list');
