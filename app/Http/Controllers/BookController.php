@@ -47,10 +47,12 @@ class BookController extends Controller
         $purchase_date->book_id = $book->id;
         $purchase_date->purchase_date = request('purchase_date');
         $purchase_date->user_id = $uers_id;
+        $purchase_date->save();
 
         $rating->book_id = $book->id;
         $rating->user_id = $user_id;
         $rating->value = request('value');
+        $rating->save();
 
     }
 }
