@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
 
+    protected $fillable = [
+        'category_id', 'edition', 'image', 'language_id', 'pub_year', 'title',
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class);
