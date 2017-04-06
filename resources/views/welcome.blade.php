@@ -83,98 +83,11 @@
 	</section>
 
 	<section id="login" class="login">
-		<h1 class="ui header inverted centered horizontal divider">Sign In</h1>
-		<div class="ui grid basic segment">
-			<div class="eight wide centered column">
-				<div class="ui form">
-					<div class="field wow slideInLeft">
-						<div class="ui left icon input">
-							<input type="text" placeholder="Username">
-							<i class="user icon"></i>
-						</div>
-					</div>
-					<div class="field wow slideInRight">
-						<div class="ui left icon input">
-						<input type="password" placeholder="Password">
-						<i class="lock icon"></i>
-						</div>
-					</div>
-					<div class="inline field  wow fadeIn">
-						<div class="ui checkbox">
-							<input id="remember" type="checkbox">
-							<label for="remember"> Remember me </label>
-						</div>
-					</div>
-					<div class="ui teal submit button wow fadeIn"> Sign In </div>
-				</div>
-			</div>
-		</div>
+		@include('components.login')
 	</section>
 
 	<section id="signup" class="signup">
-		<h1 class="ui header centered horizontal divider">Registration</h1>
-		<div class="ui grid basic segment">
-			<div class="eight wide centered column">
-				<div class="ui form">
-					<div class="field wow slideInLeft">
-						<label> Name </label>
-						<div class="ui left icon input">
-							<input placeholder="Bruce Wayne" type="text">
-							<i class="user icon"></i>
-							<div class="ui corner label">
-								<i class="asterisk icon"></i>
-							</div>
-						</div>
-					</div>
-					<div class="two fields wow slideInRight">
-						<div class="field">
-							<label> Username </label>
-							<div class="ui left icon input">
-								<input id="username" placeholder="Batman" type="text">
-								<i class="user icon"></i>
-								<div class="ui corner label">
-									<i class="asterisk icon"></i>
-								</div>
-							</div>
-						</div>
-						<div class="field">
-							<label> Email </label>
-							<div class="ui left icon input">
-								<input id="email" placeholder="batman@batcave.com" type="text">
-								<i class="mail icon"></i>
-								<div class="ui corner label">
-									<i class="asterisk icon"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="two fields  wow slideInLeft">
-						<div class="field">
-							<label> Password </label>
-							<div class="ui left icon input">
-								<input id="password" placeholder="e.g., !@#$%^&amp;*()_+:)" type="password">
-								<i class="lock icon"></i>
-								<div class="ui corner label">
-									<i class="asterisk icon"></i>
-								</div>
-							</div>
-						</div>
-						<div class="field">
-							<label> Confirm Password </label>
-							<div class="ui left icon input">
-								<input id="confirm-password" placeholder="e.g., !@#$%^&amp;*()_+:)" type="password">
-								<i class="lock icon"></i>
-								<div class="ui corner label">
-									<i class="asterisk icon"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="ui teal submit button wow fadeIn"> Sign Up </div>
-					<div class="ui error message"></div>
-				</div>
-			</div>
-		</div>
+		@include('components.register')
 	</section>
 
 	<section class="footer">

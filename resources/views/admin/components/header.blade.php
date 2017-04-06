@@ -5,7 +5,7 @@
 
                 <a href="/dashboard">
                     <img class="ui avatar image" src="/images/avatar.png">
-                    <span>Bruce Wayne</span>
+                    <span>{{ Auth::user()->name }}</span>
                 </a>
 
 
@@ -28,7 +28,14 @@
 
         <div class="three wide column right floated left aligned">
             <div class="ui secondary  menu">
-              <a class="item signout">Sign Out &nbsp<i class="sign out icon"></i></a>
+              <a href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();"
+              class="item signout">Sign Out &nbsp<i class="sign out icon"></i>
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>
             </div>
         </div>
 
