@@ -15,6 +15,7 @@ class BorrowerController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->input());
 
         $lend_date = $request->input('lend_date');
 		$fomatted_lend_date = Carbon::parse($lend_date)->format('Y-m-d');
@@ -29,7 +30,7 @@ class BorrowerController extends Controller
             'lend_date' => $fomatted_lend_date,
             'return_date' => $fomatted_return_date,
             'status' => 1,
-            'user_id' => $request->user()
+            'user_id' => $request->user()->id
         ]);
 
     }

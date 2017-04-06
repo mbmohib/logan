@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Borrower extends Model
 {
 	protected $fillable = [
-        'name', 'email', 'mobile', 'lend_date', 'return_date', 'status',
+        'name', 'email', 'mobile', 'lend_date', 'return_date', 'status', 'user_id',
     ];
 
     public function books()
