@@ -8,7 +8,6 @@
                     <span>{{ Auth::user()->name }}</span>
                 </a>
 
-
         </div>
 
         <div class="eight wide column centered">
