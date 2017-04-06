@@ -19,4 +19,14 @@ class Borrower extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        if ($filters['return'] == 'true') {
+            $query->where('status', false);
+        }
+        if ($filters['return'] == 'false') {
+            $query->where('status', true);
+        }
+    }
 }

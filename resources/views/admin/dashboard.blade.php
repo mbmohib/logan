@@ -22,9 +22,6 @@
 			<div class="ui negative message container large">
 				<i class="close icon close_status"></i>
 				<ul>
-					{{-- <div class="header">
-						There is something WRONG here!
-					</div> --}}
 					@foreach ($errors->all() as $error)
 						<p><i class="warning circle icon"></i>{{ $error }}</p>
 					@endforeach

@@ -15,15 +15,11 @@ class BorrowerController extends Controller
 
     public function index(Request $request)
     {
-        $borrowers = Borrower::where('user_id', $request->user()->id)->latest();
+        $borrowers = Borrower::where('user_id', $request->user()->id)
+                                ->filter(request(['return']))
+                                ->latest()
+                                ->get();
 
-        if ($request->has('return')) {
-            if ($request->return == 'true') {
-                $borrowers = $borrowers->where('status', false);
-            } elseif ($request->return == 'false') {
-                $borrowers = $borrowers->where('status', true);
-            }
-        }
 
         $total = Borrower::where('user_id', $request->user()->id)->count();
         $not_return = Borrower::where([
@@ -35,7 +31,7 @@ class BorrowerController extends Controller
                 ['user_id', $request->user()->id]
             ])->count();
 
-        $borrowers = $borrowers->get();
+        // $borrowers = $borrowers->get();
 
         return view('admin.admin-borrower-list', compact('borrowers', 'total' , 'return', 'not_return'));
     }
