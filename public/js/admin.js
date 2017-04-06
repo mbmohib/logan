@@ -16,3 +16,7 @@ $('.ui.rating')
   $('.date').calendar({
     type: 'date'
   });
+
+$(".close_status").click(function(){
+  $(".message").hide();
+});

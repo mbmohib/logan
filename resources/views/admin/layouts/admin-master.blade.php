@@ -25,12 +25,10 @@
         ]) !!};
     </script>
     <body>
+        
         {{-- <div class="ui bottom attached segment pushable"> --}}
             @yield('content')
         {{-- </div> --}}
-
-
-
 
 	{{-- Javascript Files --}}
     @section('javascript')

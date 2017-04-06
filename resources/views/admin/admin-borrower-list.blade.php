@@ -15,49 +15,42 @@
 	        </tr>
 	      </thead>
 	      <tbody>
-	        <tr>
-	          <td>Code Smart</td>
-	          <td>Dayle Raees</td>
-	          <td>Category</td>
-	          <td>22 Jan, 2017</td>
-	          <td>22 Jan, 2017</td>
-			  <td><i class="icon"></i></td>
-	        </tr>
+			@foreach ($borrowers as $borrower)
 
 	        <tr>
-	          <td>Code Smart</td>
-	          <td>Dayle Raees</td>
-	          <td>Category</td>
-	          <td>22 Jan, 2017</td>
-	          <td>22 Jan, 2017</td>
-			  <td><i class="icon"></i></td>
+	          <td>{{ $borrower->name }}</td>
+	          <td>{{ $borrower->email }}</td>
+	          <td>{{ $borrower->mobile }}</td>
+	          <td>{{ $borrower->lend_date }}</td>
+	          <td>{{ $borrower->return_date }}</td>
+			  <td>
+				@if ($borrower->status)
+				  	<i class="send outline icon"></i>
+				@else
+					<i class="icon"></i>
+				@endif
+			  </td>
 	        </tr>
 
-	        <tr>
-	          <td>Code Smart</td>
-	          <td>Dayle Raees</td>
-	          <td>Category</td>
-	          <td>22 Jan, 2017</td>
-	          <td>22 Jan, 2017</td>
-			  <td><i class="send outline icon"></i></td>
-	        </tr>
+			@endforeach
+
 	      </tbody>
 	    </table>
 	  </div>
 
 	  <div class="three wide column">
 			<div class="ui vertical menu">
-			<a class="active teal item">
+			<a class="active teal item" href="/dashboard/borrowers">
 				Total
-				<div class="ui teal left pointing label">20</div>
+				<div class="ui teal left pointing label">{{ $total }}</div>
 			</a>
-			<a class="item">
+			<a class="item" href="/dashboard/borrowers?return=true">
 				Returned
-				<div class="ui label">5</div>
+				<div class="ui label">{{ $return }}</div>
 			</a>
-			<a class="item">
+			<a class="item" href="/dashboard/borrowers?return=false">
 				Not Return
-				<div class="ui label">15</div>
+				<div class="ui label">{{ $not_return }}</div>
 			</a>
 			</div>
 	      </div>

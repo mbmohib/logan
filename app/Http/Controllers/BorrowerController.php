@@ -13,9 +13,36 @@ class BorrowerController extends Controller
         return view('admin.admin-add-borrower');
     }
 
+    public function index(Request $request)
+    {
+        $borrowers = Borrower::latest();
+
+        if ($request->has('return')) {
+            if ($request->return == 'true') {
+                $borrowers = $borrowers->where('status', false);
+            } elseif ($request->return == 'false') {
+                $borrowers = $borrowers->where('status', true);
+            }
+        }
+
+        $total = Borrower::count();
+        $not_return = Borrower::where('status', true)->count();
+        $return = Borrower::where('status', false)->count();
+
+        $borrowers = $borrowers->get();
+
+        return view('admin.admin-borrower-list', compact('borrowers', 'total' , 'return', 'not_return'));
+    }
+
     public function store(Request $request)
     {
-        // dd($request->input());
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:borrowers',
+            'mobile' => 'required|unique:borrowers',
+            'lend_date' => 'required',
+            'return_date' => 'required|date|after_or_equal:lend_date',
+        ]);
 
         $lend_date = $request->input('lend_date');
 		$fomatted_lend_date = Carbon::parse($lend_date)->format('Y-m-d');
@@ -23,15 +50,15 @@ class BorrowerController extends Controller
         $return_date = $request->input('return_date');
 		$fomatted_return_date = Carbon::parse($return_date)->format('Y-m-d');
 
-        return Borrower::create([
+        Borrower::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'mobile' => $request->input('mobile'),
             'lend_date' => $fomatted_lend_date,
             'return_date' => $fomatted_return_date,
-            'status' => 1,
             'user_id' => $request->user()->id
         ]);
-
+        $request->session()->flash('status', 'Borrower added successfully!');
+        return redirect()->route('borrowers');
     }
 }

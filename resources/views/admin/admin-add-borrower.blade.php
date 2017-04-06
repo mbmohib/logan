@@ -1,6 +1,8 @@
 @extends('admin.dashboard')
 
 @section('admin_content')
+
+
 	<div class="ui grid container">
 	    <div class="eight wide centered column">
 	        <h1 class="ui header centered horizontal divider">Add Borrower</h1>

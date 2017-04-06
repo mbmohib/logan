@@ -1,6 +1,6 @@
 <div class="ui grid logan-header">
     <div class="row">
-        <div class="four wide column dashboard_title">
+        <div class="five wide column dashboard_title">
             <a class="item"><i id="toggle" class="sidebar icon"></i></a>
 
                 <a href="/dashboard">
@@ -10,7 +10,7 @@
 
         </div>
 
-        <div class="eight wide column centered">
+        <div class="seven wide column centered">
             <div class="ui form">
                 <div class="field">
                     <div class="ui search book-search">
