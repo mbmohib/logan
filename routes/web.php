@@ -32,11 +32,8 @@ Route::group(['prefix' => 'dashboard'], function () {
         return view('admin.admin-books-list');
     });
 
-    Route::get('/add-borrower', function ()    {
-        return view('admin.admin-add-borrower');
-    });
+    Route::get('/add-borrower', 'BorrowerController@create');
+    Route::post('/add-borrower', 'BorrowerController@store')->name('add-borrower');
+    Route::get('/borrowers', 'BorrowerController@index')->name('borrowers');
 
-    Route::get('/borrowers', function ()    {
-        return view('admin.admin-borrower-list');
-    });
 });
