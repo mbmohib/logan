@@ -11,6 +11,8 @@
 
         <form class="ui form" method="post" action="{{ route('store-book') }}">
 
+            {{ csrf_field() }}
+
             <div class="field">
 
                 <label>Title</label>
@@ -37,7 +39,7 @@
 
                     <i class="dropdown icon"></i>
 
-                    <div class="default text">Drama</div>
+                    <div class="default text">Select A Category</div>
 
                     <div class="menu">
 
@@ -61,7 +63,7 @@
 
                     <i class="dropdown icon"></i>
 
-                    <div class="default text">Bangla</div>
+                    <div class="default text">Select A Language</div>
 
                     <div class="menu">
 
@@ -170,7 +172,7 @@
 
             </div>
 
-             <div class="ui teal submit button">Submit</div>
+             <button class="ui teal submit button" type="submit">Submit</button>
 
         </form>
 

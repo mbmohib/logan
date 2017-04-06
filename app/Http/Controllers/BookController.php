@@ -5,26 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Language;
+use Auth;
+use Carbon\Carbon;
+
+use \App\Book;
+use \App\Rating;
+use \App\Author;
+use \App\PurchaseDate;
+
 
 class BookController extends Controller
 {
     public function create()
     {
+        // return categories from categories table
         $categories = Category::all();
+        // return languages from languages table
         $languages = Language::all();
         return view('admin.admin-add-book', compact('categories', 'languages'));
     }
 
     public function store()
     {
+        // $fornmatted_date = Carbon::parse(request('purchase_date'))->format('Y-m-d');
+        // dd($fornmatted_date);
+
         $user_id = Auth::user()->id; // current user id
 
-        $book = new App\Book;
+        $book = new Book; // instance of Book model
         // $author = new App\Author;
-        $rating = new App\Rating;
-        $purchase_date = new App\PurchaseDate;
+        $rating = new Rating; // instance of Rating model
+        $purchase_date = new PurchaseDate; // instance of PurchaseDate
 
-        $author = App\Author::firstOrNew([
+        // this function add new author in author table
+        // if author existed returned id 
+        $author = Author::firstOrNew([
             'name' => request('name')
         ]);
 
@@ -45,14 +60,17 @@ class BookController extends Controller
         $book->users()->attach($user_id);
 
         $purchase_date->book_id = $book->id;
-        $purchase_date->purchase_date = request('purchase_date');
-        $purchase_date->user_id = $uers_id;
+        $purchase_date->purchase_date = Carbon::parse(request('purchase_date'))
+                                        ->format('Y-m-d');
+        $purchase_date->user_id = $user_id;
         $purchase_date->save();
 
         $rating->book_id = $book->id;
         $rating->user_id = $user_id;
         $rating->value = request('value');
         $rating->save();
+
+        return redirect('/dashboard');
 
     }
 }
