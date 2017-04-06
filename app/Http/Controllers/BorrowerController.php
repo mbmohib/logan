@@ -15,7 +15,7 @@ class BorrowerController extends Controller
 
     public function index(Request $request)
     {
-        $borrowers = Borrower::latest();
+        $borrowers = Borrower::where('user_id', $request->user()->id)->latest();
 
         if ($request->has('return')) {
             if ($request->return == 'true') {
@@ -25,9 +25,15 @@ class BorrowerController extends Controller
             }
         }
 
-        $total = Borrower::count();
-        $not_return = Borrower::where('status', true)->count();
-        $return = Borrower::where('status', false)->count();
+        $total = Borrower::where('user_id', $request->user()->id)->count();
+        $not_return = Borrower::where([
+                ['status', true],
+                ['user_id', $request->user()->id]
+            ])->count();
+        $return = Borrower::where([
+                ['status', false],
+                ['user_id', $request->user()->id]
+            ])->count();
 
         $borrowers = $borrowers->get();
 
