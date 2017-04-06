@@ -99,7 +99,7 @@
 
                 <label>Edition</label>
 
-                <input type="text" name="edition" placeholder="Ex: 3rd ">
+                <input type="text" name="edition" placeholder="Ex: 3rd">
 
             </div>
 

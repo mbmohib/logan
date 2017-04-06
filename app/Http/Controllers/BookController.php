@@ -25,22 +25,24 @@ class BookController extends Controller
         return view('admin.admin-add-book', compact('categories', 'languages'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        // $fornmatted_date = Carbon::parse(request('purchase_date'))->format('Y-m-d');
-        // dd($fornmatted_date);
 
-        $user_id = Auth::user()->id; // current user id
-
-        $book = new Book; // instance of Book model
-        // $author = new App\Author;
-        $rating = new Rating; // instance of Rating model
-        $purchase_date = new PurchaseDate; // instance of PurchaseDate
+        $this->validate($request, [
+            'title' => 'required',
+            'name' => 'required|string',
+            'category_id' => 'required|numeric',
+            'language_id' => 'required|numeric',
+            'pub_year' => 'required|numeric',
+            'purchase_date' => 'required|date|before:today',
+            'image' => 'nullable|image',
+            'value' => 'required|numeric',
+        ]);
 
         // this function add new author in author table
-        // if author existed returned id 
+        // if author existed returned id
         $author = Author::firstOrNew([
-            'name' => request('name')
+            'name' => $request->input('name')
         ]);
 
         if ($author->id == null)
@@ -48,27 +50,39 @@ class BookController extends Controller
             $author->save();
         }
 
-        $book->category_id = request('category_id');
-        $book->edition = request('edition');
-        $book->image = request('image');
-        $book->language_id = request('language_id');
-        $book->pub_year = request('pub_year');
-        $book->title = request('title');
-        $book->save();
+        $book = Book::insertGetId([
+            'category_id' => $request->input('category_id'),
+            'edition' => $request->input('edition'),
+            'image' =>$request->input('image'),
+            'language_id' =>$request->input('language_id'),
+            'pub_year' => $request->input('pub_year'),
+            'title' => $request->input('title')
+        ]);
 
-        $author->books()->attach($book->id);
-        $book->users()->attach($user_id);
+        $user_id = Auth::user(); // current user id
 
-        $purchase_date->book_id = $book->id;
-        $purchase_date->purchase_date = Carbon::parse(request('purchase_date'))
-                                        ->format('Y-m-d');
-        $purchase_date->user_id = $user_id;
-        $purchase_date->save();
+        $author->books()->attach($book); // inserting data in the pivot table
+        // $book->users()->attach($user_id);
+        $user_id->books()->attach($book);
 
-        $rating->book_id = $book->id;
-        $rating->user_id = $user_id;
-        $rating->value = request('value');
-        $rating->save();
+        // $purchase_date->book_id = $book->id;
+        $input_date = $request->input('purchase_date');
+        $purchase_date = Carbon::parse($input_date)->format('Y-m-d');
+
+        PurchaseDate::create([
+            'book_id' => $book,
+            'purchase_date' => $purchase_date,
+            'user_id' => $request->user()->id
+        ]);
+
+        Rating::create([
+            'book_id' => $book,
+            'user_id' => $request->user()->id,
+            'value' => $request->input('value')
+        ]);
+
+        // for success notification
+        $request->session()->flash('status', 'Book added successfully!');
 
         return redirect('/dashboard');
 
