@@ -10,17 +10,26 @@
 				{{ csrf_field() }}
 	            <div class="field">
 	                <label>Name</label>
-	                <input type="text" name="name" placeholder="Name">
+					<div class="ui input left icon">
+						<i class="user icon"></i>
+	                	<input type="text" name="name" placeholder="Name">
+					</div>
 	            </div>
 
 				<div class="field">
 	                <label>Email</label>
+					<div class="ui input left icon">
+						<i class="mail icon"></i>
 	                <input type="text" name="email" placeholder="Email">
+					</div>
 	            </div>
 
 	            <div class="field">
 	                <label>Mobile</label>
+					<div class="ui input left icon">
+						<i class="mobile icon"></i>
 	                <input type="text" name="mobile" placeholder="Mobile No">
+					</div>
 	            </div>
 
 				<div class="field">
