@@ -3,24 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Borrower;
+use App\Book;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class BorrowerController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.admin-add-borrower');
+        $books = Book::join('book_user', 'books.id', '=', 'book_user.user_id')
+                            ->where('user_id', $request->user()->id)
+                            ->select('books.id', 'books.title')
+                            ->get();
+
+        return view('admin.admin-add-borrower', compact('books'));
     }
 
     public function index(Request $request)
     {
         $borrowers = Borrower::where('user_id', $request->user()->id)
-                                ->filter(request(['return']))
+                                ->filter(request(['return'])) //Scope function for filtering by return and non return
                                 ->latest()
                                 ->get();
 
 
+        // For returning number
         $total = Borrower::where('user_id', $request->user()->id)->count();
         $not_return = Borrower::where([
                 ['status', true],
@@ -31,28 +38,31 @@ class BorrowerController extends Controller
                 ['user_id', $request->user()->id]
             ])->count();
 
-        // $borrowers = $borrowers->get();
-
         return view('admin.admin-borrower-list', compact('borrowers', 'total' , 'return', 'not_return'));
     }
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:borrowers',
-            'mobile' => 'required|unique:borrowers',
-            'lend_date' => 'required',
-            'return_date' => 'required|date|after_or_equal:lend_date',
+            'email' => 'required',
+            'mobile' => 'required',
+            'lend_date' => 'required|date',
+            'return_date' => 'required|date|after_or_equal:lend_date', //Only accept if return date > lend date
+            'books' => 'required',
         ]);
 
+        //Format the date according to DB
         $lend_date = $request->input('lend_date');
 		$fomatted_lend_date = Carbon::parse($lend_date)->format('Y-m-d');
 
         $return_date = $request->input('return_date');
 		$fomatted_return_date = Carbon::parse($return_date)->format('Y-m-d');
 
-        Borrower::create([
+
+        //Return id after creating borrower
+        $borrowerId = Borrower::insertGetId([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'mobile' => $request->input('mobile'),
@@ -60,7 +70,22 @@ class BorrowerController extends Controller
             'return_date' => $fomatted_return_date,
             'user_id' => $request->user()->id
         ]);
+
+        // Find borrower instance
+        $borrower = Borrower::find($borrowerId);
+
+        //Split string and convert to array
+        $books = $request->input('books');
+        $booksToArray = explode(',', $books);
+
+        // Add multiple book to pivot table
+        foreach ($booksToArray as $bookId) {
+            $borrower->books()->attach($bookId);
+        }
+
+        //Return a flash message
         $request->session()->flash('status', 'Borrower added successfully!');
+
         return redirect()->route('borrowers');
     }
 }

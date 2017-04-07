@@ -23,6 +23,22 @@
 	                <input type="text" name="mobile" placeholder="Mobile No">
 	            </div>
 
+				<div class="field">
+					<label>Books</label>
+					<div class="ui multiple search selection dropdown">
+						<input name="books" type="hidden">
+						<i class="dropdown icon"></i>
+						<div class="default text">Books</div>
+						<div class="menu">
+
+						@foreach ($books as $book)
+							<div class="item" data-value="{{ $book->id }}">{{ $book->title }}</div>
+						@endforeach
+
+						</div>
+			        </div>
+				</div>
+
 
 	            <div class="field">
 	                <label>Lend Date</label>
