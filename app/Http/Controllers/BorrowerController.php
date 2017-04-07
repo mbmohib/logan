@@ -38,7 +38,9 @@ class BorrowerController extends Controller
                 ['user_id', $request->user()->id]
             ])->count();
 
-        return view('admin.admin-borrower-list', compact('borrowers', 'total' , 'return', 'not_return'));
+        $books = Book::all();
+
+        return view('admin.admin-borrower-list', compact('borrowers', 'books', 'total' , 'return', 'not_return'));
     }
 
     public function store(Request $request)
