@@ -11,6 +11,18 @@ $('.ui.dropdown')
 $('.ui.rating')
   .rating();
 
+// Popup Modal
+$(".view_book").click(function(){
+  $('.ui.modal.v_book').modal('show');
+});
+
+$(".add_book").click(function(){
+  $('.ui.modal.a_book').modal('show');
+});
+$('.ui.modal').modal({
+  observeChanges:true
+});
+
 // Calendar Initialize
 $('#year').calendar({
   type: 'year'
@@ -24,13 +36,6 @@ $(".close_status").click(function(){
   $(".message").hide();
 });
 
-$(".view_book").click(function(){
-  $('.ui.modal.v_book').modal('show');
-});
-
-$(".add_book").click(function(){
-  $('.ui.modal.a_book').modal('show');
-});
 
 $('.ui.checkbox')
   .checkbox()
