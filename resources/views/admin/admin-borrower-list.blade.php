@@ -18,7 +18,7 @@
 	      <tbody>
 			@foreach ($borrowers as $borrower)
 
-	        <tr>
+	        <tr class="borrower_info">
 	          <td>{{ $borrower->name }}</td>
 	          <td>{{ $borrower->email }}</td>
 	          <td>{{ $borrower->mobile }}</td>
@@ -29,7 +29,7 @@
 					<i class="icon"></i>
 				@endif
 			  </td>
-			  <td class="add_book"><i class="book icon"></i></td>
+			  <td value="{{ $borrower->id }}" class="add_book"><i class="book icon"></i></td>
 	          <td class="view_book"><i class="external icon"></i></td>
 	        </tr>
 
@@ -46,7 +46,8 @@
 				Add Books
 			</div>
 
-			<form class="ui form add-book-to-borrower">
+			<form class="ui form add-book-to-borrower" method="post">
+				{{ csrf_field() }}
 				<div class="field">
 					<label>Books</label>
 					<div class="ui multiple search selection dropdown">

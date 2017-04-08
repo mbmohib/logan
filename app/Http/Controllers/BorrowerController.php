@@ -90,4 +90,31 @@ class BorrowerController extends Controller
 
         return redirect()->route('borrowers');
     }
+
+	public function bookStore(Request $request)
+    {
+        // dd($request->input());
+        $this->validate($request, [
+            'lend_date' => 'required|date',
+            'return_date' => 'required|date|after_or_equal:lend_date', //Only accept if return date > lend date
+            'books' => 'required',
+            'borrower_id' => 'required',
+        ]);
+
+        $borrower = Borrower::find($request->input('borrower_id'));
+
+        //Split string and convert to array
+        $books = $request->input('books');
+        $booksToArray = explode(',', $books);
+
+        // Add multiple book to pivot table
+        foreach ($booksToArray as $bookId) {
+            $borrower->books()->attach($bookId);
+        }
+
+        $request->session()->flash('status', 'Books assign to borrower successfully!');
+
+        return redirect()->route('borrowers');
+
+    }
 }

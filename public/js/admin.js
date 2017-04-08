@@ -1,3 +1,6 @@
+/*===================Semantic UI=====================
+=====================================================*/
+
 //---------- For toggle Side Menu---------------
 $('#toggle').click(function() {
     $('.ui.sidebar').sidebar('toggle');
@@ -49,3 +52,22 @@ $(".close_status").click(function(){
 $('.ui.checkbox')
   .checkbox()
 ;
+
+
+/*===================Custom=====================
+=====================================================*/
+
+//-------- Send Add book form data from modal-------------
+$(".borrower_info").find(".add_book").click(function(){
+    var borrower_id = $(this).attr("value");
+    $(".ui.positive.button").click(function() {
+         event.preventDefault();
+
+        var data = $('.add-book-to-borrower').serialize();
+        var full_data = data + "&borrower_id=" + borrower_id;
+
+        $.post('/dashboard/borrowers', full_data, function() {
+            location.reload();
+        });
+    });
+});
