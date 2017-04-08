@@ -95,6 +95,7 @@
 				</div>
 			</form>
 		</div>
+
 		<!-- End Add Books Modal Section -->
 
 
