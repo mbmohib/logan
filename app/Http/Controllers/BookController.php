@@ -35,7 +35,6 @@ class BookController extends Controller
             'language_id' => 'required|numeric',
             'pub_year' => 'required|numeric',
             'purchase_date' => 'required|date|before:today',
-            'image' => 'nullable|image',
             'value' => 'required|numeric',
         ]);
 
@@ -53,7 +52,6 @@ class BookController extends Controller
         $book = Book::insertGetId([
             'category_id' => $request->input('category_id'),
             'edition' => $request->input('edition'),
-            'image' =>$request->input('image'),
             'language_id' =>$request->input('language_id'),
             'pub_year' => $request->input('pub_year'),
             'title' => $request->input('title')

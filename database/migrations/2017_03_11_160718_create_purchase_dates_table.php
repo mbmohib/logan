@@ -16,7 +16,6 @@ class CreatePurchaseDatesTable extends Migration
         Schema::create('purchase_dates', function (Blueprint $table) {
             $table->increments('id');
             $table->date('purchase_date');
-            $table->timestamps();
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')->references('id')->on('books');
             $table->integer('user_id')->unsigned();

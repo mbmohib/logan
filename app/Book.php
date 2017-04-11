@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    public $timestapms = false; // disable timestapms in books table
 
+    // for mass assignment
     protected $fillable = [
-        'category_id', 'edition', 'image', 'language_id', 'pub_year', 'title',
+        'category_id', 'edition', 'language_id', 'pub_year', 'title',
     ];
 
     public function users()
