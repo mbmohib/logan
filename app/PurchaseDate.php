@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PurchaseDate extends Model
 {
+    public $timestapms = false; // disable timestapms in purchase_dates table
+    
+    // for mass assignment
     protected $fillable = [
         'book_id', 'purchase_date', 'user_id',
     ];

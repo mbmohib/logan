@@ -18,8 +18,6 @@ class CreateBooksTable extends Migration
             $table->string('title')->unique();
             $table->integer('pub_year');
             $table->string('edition')->nullable();
-            $table->string('image')->nullable();
-            $table->timestamps();
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('language_id')->unsigned();
@@ -32,6 +30,7 @@ class CreateBooksTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+            $table->boolean('status')->default(true);
 
         });
     }
