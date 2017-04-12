@@ -29,29 +29,22 @@
 
             </div>
 
-            <div class="field">
 
-                <label>Category</label>
+			<div class="field">
+				<label>Category</label>
+				<div class="ui search selection dropdown">
+					<input type="hidden" name="category_id">
+					<i class="dropdown icon"></i>
+					<div class="default text">Category</div>
+					<div class="menu">
 
-                <div class="ui selection dropdown">
+					@foreach ($categories as $category)
+						<div class="item" data-value={{ $category->id }}>{{ $category->name }}</div>
+					@endforeach
 
-                    <input type="hidden" name="category_id">
-
-                    <i class="dropdown icon"></i>
-
-                    <div class="default text">Select A Category</div>
-
-                    <div class="menu">
-
-                        @foreach ($categories as $category)
-                            <div class="item" data-value={{ $category->id }}>{{ $category->name }}</div>
-                        @endforeach
-
-                    </div>
-
-                </div>
-
-            </div>
+					</div>
+				</div>
+			</div>
 
             <div class="field">
 
@@ -121,56 +114,6 @@
 
             </div>
 
-            <div class="two fields">
-
-                <div class="field">
-
-                    <div>
-                        <label for="file" class="ui icon button">
-
-                            <i class="image icon"></i>
-
-                            Upload Image
-
-                        </label>
-
-                        <input type="file" id="file" name="image" style="display:none">
-
-                    </div>
-
-                </div>
-
-                <div class="field">
-
-                    <label>Rating</label>
-
-                    <div class="ui selection dropdown">
-
-                        <input type="hidden" name="value">
-
-                        <i class="dropdown icon"></i>
-
-                        <div class="default text">1</div>
-
-                        <div class="menu">
-
-                            <div class="item" data-value="1">1</div>
-
-                            <div class="item" data-value="2">2</div>
-
-                            <div class="item" data-value="3">3</div>
-
-                            <div class="item" data-value="4">4</div>
-
-                            <div class="item" data-value="5">5</div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
 
              <button class="ui teal submit button" type="submit">Submit</button>
 

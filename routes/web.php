@@ -39,6 +39,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/add-borrower', 'BorrowerController@create');
     Route::post('/add-borrower', 'BorrowerController@store')->name('add-borrower');
     Route::get('/borrowers', 'BorrowerController@index')->name('borrowers');
+    Route::get('/borrowers/{borrower}', 'BorrowerController@show')->name('borrower-show');
     Route::get('/borrower-update', 'BorrowerController@borrowerUpdateCreate')->name('borrower-update');
     Route::post('/borrower-update', 'BorrowerController@borrowerUpdate')->name('borrower-update');
 

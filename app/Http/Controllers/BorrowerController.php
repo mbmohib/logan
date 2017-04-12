@@ -6,12 +6,20 @@ use App\Borrower;
 use App\Book;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class BorrowerController extends Controller
 {
+
+
     public function create(Request $request)
     {
-        $books = Book::all();
+        //Return Book with authentic user
+        $books = Book::with('users')
+                    ->whereHas('users', function($q) {
+                                   $q->where('user_id', Auth::id());
+                        })
+                   ->get();
 
         return view('admin.admin-add-borrower', compact('books'));
     }
@@ -19,24 +27,22 @@ class BorrowerController extends Controller
     public function index(Request $request)
     {
         $borrowers = Borrower::where('user_id', $request->user()->id)
-                                // ->filter(request(['return'])) //Scope function for filtering by return and non return
                                 ->get();
 
 
-        // For returning number
-        $total = Borrower::where('user_id', $request->user()->id)->count();
-        $not_return = Borrower::where([
-                ['status', true],
-                ['user_id', $request->user()->id]
-            ])->count();
-        $return = Borrower::where([
-                ['status', false],
-                ['user_id', $request->user()->id]
-            ])->count();
+        // // For returning number
+        // $total = Borrower::where('user_id', $request->user()->id)->count();
+        // $not_return = Borrower::where([
+        //         ['status', true],
+        //         ['user_id', $request->user()->id]
+        //     ])->count();
+        // $return = Borrower::where([
+        //         ['status', false],
+        //         ['user_id', $request->user()->id]
+        //     ])->count();
 
-        $books = Book::all();
 
-        return view('admin.admin-borrower-list', compact('borrowers', 'books', 'total' , 'return', 'not_return'));
+        return view('admin.admin-borrower-list', compact('borrowers'));
     }
 
     public function store(Request $request)
@@ -83,8 +89,7 @@ class BorrowerController extends Controller
         foreach ($booksToArray as $bookId) {
             $borrower[0]->books()->attach($bookId, [
                 'lend_date' => $fomatted_lend_date,
-                'return_date' => $fomatted_return_date,
-                'orginal_return_date' => $fomatted_return_date
+                'return_date' => $fomatted_return_date
             ]);
         }
 
@@ -125,5 +130,11 @@ class BorrowerController extends Controller
 
         return redirect()->route('borrowers');
 
+    }
+
+    public function show(Borrower $borrower)
+    {
+        $books = $borrower->books;
+        return view('admin.admin-borrower-show', compact('borrower', 'books'));
     }
 }
