@@ -16,17 +16,18 @@ class CreateBorrowersTable extends Migration
         Schema::create('borrowers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('mobile');
-            $table->string('email')->unique();
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+			$table->timestamps();
         });
 
         Schema::create('book_borrower', function (Blueprint $table) {
             $table->increments('id');
             $table->date('lend_date');
             $table->date('return_date');
-            $table->date('orginal_return_date');
+            $table->date('orginal_return_date')->nullable();
             $table->integer('borrower_id')->unsigned();
             $table->foreign('borrower_id')->references('id')->on('borrowers')->onDelete('cascade');
             $table->integer('book_id')->unsigned();

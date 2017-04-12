@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Borrower extends Model
 {
-	public $timestapms = false; // disable timestapms in borrowers table
 
 	// for mass assignment
 	protected $fillable = [

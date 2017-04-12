@@ -54,6 +54,18 @@ class BorrowerController extends Controller
         $name = $request->input('name');
         $borrower = Borrower::where('name', $name)->get();
 
+        // To Redirect to Borrower Add Page if not Exist
+        $checkEmpty = $borrower;
+
+        // Create Borrower if not exist
+        if ($borrower->isEmpty()) {
+            $borrower = Borrower::insertGetId([
+                'name' => $request->input('name'),
+                'user_id' => $request->user()->id
+            ]);
+            $borrower = Borrower::where('id', $borrower)->get();
+        }
+
 
         //Format the date according to DB
         $lend_date = $request->input('lend_date');
@@ -61,15 +73,6 @@ class BorrowerController extends Controller
 
         $return_date = $request->input('return_date');
 		$fomatted_return_date = Carbon::parse($return_date)->format('Y-m-d');
-
-
-        // //Return id after creating borrower
-        // $borrowerId = Borrower::insertGetId([
-        //     'name' => $request->input('name'),
-        //     'lend_date' => $fomatted_lend_date,
-        //     'return_date' => $fomatted_return_date,
-        //     'user_id' => $request->user()->id
-        // ]);
 
 
         //Split string and convert to array
@@ -85,34 +88,40 @@ class BorrowerController extends Controller
             ]);
         }
 
-        //Return a flash message
-        $request->session()->flash('status', 'Successfull!');
 
+
+        if ($checkEmpty->isEmpty()) {
+            $request->session()->flash('status', 'Please Complete the Borrower Info!');
+            return redirect()->route('borrower-update');
+        }
+        //Return a flash message
+        $request->session()->flash('status', 'Add books to borrower Successfully!');
         return redirect()->route('borrowers');
     }
 
-	public function bookStore(Request $request)
+    public function borrowerUpdateCreate()
     {
-        // dd($request->input());
+        return view('admin.admin-borrower-update');
+    }
+
+	public function borrowerUpdate(Request $request)
+    {
         $this->validate($request, [
-            'lend_date' => 'required|date',
-            'return_date' => 'required|date|after_or_equal:lend_date', //Only accept if return date > lend date
-            'books' => 'required',
-            'borrower_id' => 'required',
+            'email' => 'required',
+            'mobile' => 'required',
         ]);
 
-        $borrower = Borrower::find($request->input('borrower_id'));
 
-        //Split string and convert to array
-        $books = $request->input('books');
-        $booksToArray = explode(',', $books);
+        $borrower = $borrower = \App\Borrower::all()
+                ->last()
+                ->update([
+                    'email' => $request->input('email'),
+                    'mobile' => $request->input('mobile'),
+                ]);
 
-        // Add multiple book to pivot table
-        foreach ($booksToArray as $bookId) {
-            $borrower->books()->attach($bookId);
-        }
 
-        $request->session()->flash('status', 'Books assign to borrower successfully!');
+
+        $request->session()->flash('status', 'Borrower Added Successfully!');
 
         return redirect()->route('borrowers');
 

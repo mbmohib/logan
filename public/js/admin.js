@@ -71,7 +71,8 @@ $('.ui.search')
     searchFields   : [
       'title'
     ],
-    searchFullText: false
+    searchFullText: false,
+	  showNoResults: false
   })
 ;
 /*===================Custom=====================

@@ -4,6 +4,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function () {
+    $borrower = \App\Borrower::all()->last();
+    return $borrower;
+});
 
 Auth::routes();
 
@@ -35,7 +39,8 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/add-borrower', 'BorrowerController@create');
     Route::post('/add-borrower', 'BorrowerController@store')->name('add-borrower');
     Route::get('/borrowers', 'BorrowerController@index')->name('borrowers');
-    Route::post('/borrowers', 'BorrowerController@bookStore');
+    Route::get('/borrower-update', 'BorrowerController@borrowerUpdateCreate')->name('borrower-update');
+    Route::post('/borrower-update', 'BorrowerController@borrowerUpdate')->name('borrower-update');
 
 });
 
