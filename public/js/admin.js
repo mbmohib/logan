@@ -52,8 +52,28 @@ $(".close_status").click(function(){
 $('.ui.checkbox')
   .checkbox()
 ;
+//--------- Borrower Search and Add----------------
+var
+  content = [
+    {
+      title: 'Maruf Hasan',
+      description: '01711981813',
+    },
+    {
+      title: 'Nurshad Rahman',
+      description: '01942614856',
+    }
+  ];
 
-
+$('.ui.search')
+  .search({
+    source : content,
+    searchFields   : [
+      'title'
+    ],
+    searchFullText: false
+  })
+;
 /*===================Custom=====================
 =================================================*/
 

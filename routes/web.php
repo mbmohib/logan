@@ -38,3 +38,11 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::post('/borrowers', 'BorrowerController@bookStore');
 
 });
+
+//Api Panel Route:
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/borrowers', function ()    {
+        $borrowers = \App\Borrower::all();
+        return $borrowers;
+    });
+});

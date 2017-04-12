@@ -8,17 +8,29 @@
 	        <h1 class="ui header centered horizontal divider">Add Borrower</h1>
 	        <form class="ui form" method="POST" action="{{ route('add-borrower')}}">
 				{{ csrf_field() }}
+	            <div class="field">
+	                <label>Name</label>
+					<div class="ui input left icon">
+						<i class="user icon"></i>
+	                	<input type="text" name="name" placeholder="Name">
+					</div>
+	            </div>
 
 				<div class="field">
-					<label>Borrower Name</label>
-					<div class="ui search">
-					  <div class="ui icon input">
-					    <input class="prompt" type="text" placeholder="Add Borrower" name="name">
-					    <i class="users icon"></i>
-					  </div>
-					  <div class="results"></div>
+	                <label>Email</label>
+					<div class="ui input left icon">
+						<i class="mail icon"></i>
+	                <input type="text" name="email" placeholder="Email">
 					</div>
-				</div>
+	            </div>
+
+	            <div class="field">
+	                <label>Mobile</label>
+					<div class="ui input left icon">
+						<i class="mobile icon"></i>
+	                <input type="text" name="mobile" placeholder="Mobile No">
+					</div>
+	            </div>
 
 				<div class="field">
 					<label>Books</label>
@@ -56,6 +68,7 @@
 	                    </div>
 	                </div>
 	            </div>
+
 
 	             <button type="submit" class="ui teal submit button">Submit</button>
 	        </form>

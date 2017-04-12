@@ -11,10 +11,7 @@ class BorrowerController extends Controller
 {
     public function create(Request $request)
     {
-        $books = Book::join('book_user', 'books.id', '=', 'book_user.user_id')
-                            ->where('user_id', $request->user()->id)
-                            ->select('books.id', 'books.title')
-                            ->get();
+        $books = Book::all();
 
         return view('admin.admin-add-borrower', compact('books'));
     }
@@ -22,8 +19,7 @@ class BorrowerController extends Controller
     public function index(Request $request)
     {
         $borrowers = Borrower::where('user_id', $request->user()->id)
-                                ->filter(request(['return'])) //Scope function for filtering by return and non return
-                                ->latest()
+                                // ->filter(request(['return'])) //Scope function for filtering by return and non return
                                 ->get();
 
 
@@ -48,12 +44,16 @@ class BorrowerController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required',
-            'mobile' => 'required',
             'lend_date' => 'required|date',
             'return_date' => 'required|date|after_or_equal:lend_date', //Only accept if return date > lend date
             'books' => 'required',
         ]);
+
+
+        //Find the borrower instance
+        $name = $request->input('name');
+        $borrower = Borrower::where('name', $name)->get();
+
 
         //Format the date according to DB
         $lend_date = $request->input('lend_date');
@@ -63,18 +63,14 @@ class BorrowerController extends Controller
 		$fomatted_return_date = Carbon::parse($return_date)->format('Y-m-d');
 
 
-        //Return id after creating borrower
-        $borrowerId = Borrower::insertGetId([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'mobile' => $request->input('mobile'),
-            'lend_date' => $fomatted_lend_date,
-            'return_date' => $fomatted_return_date,
-            'user_id' => $request->user()->id
-        ]);
+        // //Return id after creating borrower
+        // $borrowerId = Borrower::insertGetId([
+        //     'name' => $request->input('name'),
+        //     'lend_date' => $fomatted_lend_date,
+        //     'return_date' => $fomatted_return_date,
+        //     'user_id' => $request->user()->id
+        // ]);
 
-        // Find borrower instance
-        $borrower = Borrower::find($borrowerId);
 
         //Split string and convert to array
         $books = $request->input('books');
@@ -82,11 +78,15 @@ class BorrowerController extends Controller
 
         // Add multiple book to pivot table
         foreach ($booksToArray as $bookId) {
-            $borrower->books()->attach($bookId);
+            $borrower[0]->books()->attach($bookId, [
+                'lend_date' => $fomatted_lend_date,
+                'return_date' => $fomatted_return_date,
+                'orginal_return_date' => $fomatted_return_date
+            ]);
         }
 
         //Return a flash message
-        $request->session()->flash('status', 'Borrower added successfully!');
+        $request->session()->flash('status', 'Successfull!');
 
         return redirect()->route('borrowers');
     }
