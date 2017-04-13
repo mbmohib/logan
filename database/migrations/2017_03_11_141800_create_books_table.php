@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('language_id')->unsigned();
             $table->foreign('language_id')->references('id')->on('languages');
+            $table->timestamps();
         });
 
         Schema::create('book_user', function (Blueprint $table) {

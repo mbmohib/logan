@@ -10,41 +10,24 @@
         <th>Author</th>
         <th>Category</th>
         <th>Language</th>
-        <th>Purchase Date</th>
-        <th>Rating</th>
         <th>Borrow Status</th>
         </tr>
       </thead>
       <tbody>
+        @foreach ($books as $book)
         <tr>
-          <td>Code Smart</td>
-          <td>Dayle Raees</td>
-          <td>Category</td>
-          <td>English</td>
-          <td>22 Jan, 2017</td>
-          <td><div class="ui star rating" data-rating="3" data-max-rating="3"></div></td>
-          <td><i class="send outline icon"></i></td>
+          <td>{{ $book->title }}</td>
+          <td>{{ $book->authors[0]->name }}</td>
+          <td>{{ $book->category->name }}</td>
+          <td>{{ $book->language->name }}</td>
+          @if (!$book->users[0]->pivot->status)
+              <td><i class="send outline icon"></i></td>
+          @else
+              <td><i class="disk outline icon"></i></td>
+          @endif
         </tr>
-
-        <tr>
-          <td>Code Smart</td>
-          <td>Dayle Raees</td>
-          <td>Category</td>
-          <td>English</td>
-          <td>22 Jan, 2017</td>
-          <td><div class="ui star rating" data-rating="2" data-max-rating="2"></div></td>
-          <td><i class="icon"></i></td>
-        </tr>
-
-        <tr>
-          <td>Code Smart</td>
-          <td>Dayle Raees</td>
-          <td>Category</td>
-          <td>English</td>
-          <td>22 Jan, 2017</td>
-          <td><div class="ui star rating" data-rating="4" data-max-rating="4"></div></td>
-          <td><i class="send outline icon"></i></td>
-        </tr>
+        @endforeach
+        {{-- {{ $book->links() }} --}}
       </tbody>
     </table>
   </div>
