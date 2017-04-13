@@ -19,7 +19,7 @@ class BookController extends Controller
 
     public function index ()
     {
-        $books = Book::simplePaginate(5)->orderBy();
+        $books = Book::simplePaginate(5);
         return view('admin.admin-books-list', compact('books'));
     }
 
