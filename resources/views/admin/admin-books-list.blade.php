@@ -11,7 +11,6 @@
         <th>Category</th>
         <th>Language</th>
         <th>Purchase Date</th>
-        <th>Rating</th>
         <th>Borrow Status</th>
         </tr>
       </thead>
@@ -26,7 +25,7 @@
           <td><i class="send outline icon"></i></td>
         </tr>
         @endforeach
-        {{ $book->links() }}
+        {{ $books->links() }}
       </tbody>
     </table>
   </div>
