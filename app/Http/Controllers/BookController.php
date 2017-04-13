@@ -16,6 +16,13 @@ use \App\PurchaseDate;
 
 class BookController extends Controller
 {
+
+    public function index ()
+    {
+        $books = Book::simplePaginate(5)->orderBy();
+        return view('admin.admin-books-list', compact('books'));
+    }
+
     public function create()
     {
         // return categories from categories table
