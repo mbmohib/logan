@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Language;
 use Auth;
+use App\User;
 use Carbon\Carbon;
 
 use \App\Book;
@@ -27,7 +28,16 @@ class BookController extends Controller
                    ->get();
         // return $books[0]->purchaseDates[0]->purchase_date;
         // return $books[1]->users[0]->pivot->status;
+        // return $books[0]->id;
         return view('admin.admin-books-list', compact('books'));
+    }
+
+    public function show(Book $book)
+    {
+        $borrowers = $book->borrowers;
+        // return $borrowers;
+        // return $book;
+        return view('admin.admin-single-book', compact('book', 'borrowers'));
     }
 
     public function create()
@@ -46,12 +56,12 @@ class BookController extends Controller
         $this->validate($request, [
             'title' => 'required|string',
             'name' => 'required|string',
-            'cat_name' => 'required|string',
+            'cat_name' => 'required|alpha',
             // array(
             //         'required',
             //         'regex:/(^([a-zA-z]+)(\d+)?$)/u'
             //     ),
-            'lang_name' => 'required|string',
+            'lang_name' => 'required|alpha',
         ]);
 
         // this function add new author in author table
@@ -105,17 +115,30 @@ class BookController extends Controller
 
     }
 
-    public function bookUpdateCreate()
+    public function bookUpdateCreate($book)
     {
-        return view('admin.admin-book-update');
+        // return $book;
+        return view('admin.admin-book-update', compact('book'));
     }
 
     public function bookUpdateStore(Request $request)
     {
-        $this->validate([
-            'category_id' => 'required|numeric',
-            'language_id' => 'required|numeric',
+        $this->validate($request, [
             'pub_year' => 'required|numeric',
+            'edition' => 'required'
         ]);
+
+        $book_id = $request->input('book_id');
+        $user_id = Auth::user()->id;
+        // $book = Book::where('id', $book_id)->get();
+        // for updating pivot table according to the user and book id
+        User::find($user_id)->books()->updateExistingPivot($book_id, [
+            'pub_year' => $request->input('pub_year'),
+            'edition' => $request->input('edition')
+        ]);
+
+        $request->session()->flash('status', 'Book updated successfully!');
+
+        return redirect()->route('show-books');
     }
 }

@@ -8,10 +8,10 @@
 
 	        <h1 class="ui header centered horizontal divider">Add Extra Info for Book</h1>
 
-	        <form class="ui form" method="POST" action="{{ route('book-update')}}">
+	        <form class="ui form" method="POST" action="{{ route('book-update-store')}}">
 
 				{{ csrf_field() }}
-                
+
                 <div class="field">
 
                     <label>Published Year</label>
@@ -37,6 +37,8 @@
                     <input type="text" name="edition" placeholder="Ex: 3rd">
 
                 </div>
+
+				<input type="hidden" name="book_id" value="{{ $book }}">
 
                 <button class="ui teal submit button" type="submit">Submit</button>
 

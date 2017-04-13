@@ -16,7 +16,7 @@ class Book extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)
-        ->withPivot('status')
+        ->withPivot('status', 'edition', 'pub_year')
         ->wherePivot('user_id', Auth::id());
     }
 
