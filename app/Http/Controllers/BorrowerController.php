@@ -17,8 +17,8 @@ class BorrowerController extends Controller
         //Return Book with authentic user
         $books = Book::with('users')
                     ->whereHas('users', function($q) {
-                                   $q->where('user_id', Auth::id());
-                        })
+                        $q->where('user_id', Auth::id());
+                    })
                    ->get();
 
         return view('admin.admin-add-borrower', compact('books'));

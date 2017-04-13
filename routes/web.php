@@ -15,7 +15,7 @@ Route::get('/home', 'HomeController@index');
 
 
 //Dashboard Panel Route:
-Route::group(['prefix' => 'dashboard'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
   Route::get('/', 'DashboardController@index');
 
 	Route::get('/edit-profile', function ()    {
