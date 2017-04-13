@@ -9,9 +9,7 @@ use Auth;
 use Carbon\Carbon;
 
 use \App\Book;
-use \App\Rating;
 use \App\Author;
-use \App\PurchaseDate;
 
 
 class BookController extends Controller
@@ -19,7 +17,16 @@ class BookController extends Controller
 
     public function index ()
     {
-        $books = Book::simplePaginate(5);
+        // $user_id = Auth::user()->id;
+        // $books = Book::with('users')->get();
+        // dd($books);
+        $books = Book::with('users')
+                    ->whereHas('users', function($q) {
+                                   $q->where('user_id', Auth::id());
+                        })
+                   ->get();
+        // return $books[0]->purchaseDates[0]->purchase_date;
+        // return $books[1]->users[0]->pivot->status;
         return view('admin.admin-books-list', compact('books'));
     }
 
@@ -41,8 +48,6 @@ class BookController extends Controller
             'category_id' => 'required|numeric',
             'language_id' => 'required|numeric',
             'pub_year' => 'required|numeric',
-            'purchase_date' => 'required|date|before:today',
-            'value' => 'required|numeric',
         ]);
 
         // this function add new author in author table
@@ -69,22 +74,6 @@ class BookController extends Controller
         $author->books()->attach($book); // inserting data in the pivot table
         // $book->users()->attach($user_id);
         $user_id->books()->attach($book);
-
-        // $purchase_date->book_id = $book->id;
-        $input_date = $request->input('purchase_date');
-        $purchase_date = Carbon::parse($input_date)->format('Y-m-d');
-
-        PurchaseDate::create([
-            'book_id' => $book,
-            'purchase_date' => $purchase_date,
-            'user_id' => $request->user()->id
-        ]);
-
-        Rating::create([
-            'book_id' => $book,
-            'user_id' => $request->user()->id,
-            'value' => $request->input('value')
-        ]);
 
         // for success notification
         $request->session()->flash('status', 'Book added successfully!');

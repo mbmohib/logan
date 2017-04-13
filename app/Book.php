@@ -3,10 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Book extends Model
 {
-    public $timestapms = false; // disable timestapms in books table
 
     // for mass assignment
     protected $fillable = [
@@ -15,7 +15,9 @@ class Book extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+        ->withPivot('status')
+        ->wherePivot('user_id', Auth::id());
     }
 
     public function authors()
@@ -39,13 +41,4 @@ class Book extends Model
         return $this->belongsTo(Language::class);
     }
 
-    public function ratings()
-    {
-        return $this->hasMany(Rating::class);
-    }
-
-    public function purchaseDates()
-    {
-        return $this->hasMany(PurchaseDate::class);
-    }
 }

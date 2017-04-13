@@ -10,7 +10,6 @@
         <th>Author</th>
         <th>Category</th>
         <th>Language</th>
-        <th>Purchase Date</th>
         <th>Borrow Status</th>
         </tr>
       </thead>
@@ -18,14 +17,17 @@
         @foreach ($books as $book)
         <tr>
           <td>{{ $book->title }}</td>
-          <td>{{ $book->authors->name }}</td>
+          <td>{{ $book->authors[0]->name }}</td>
           <td>{{ $book->category->name }}</td>
           <td>{{ $book->language->name }}</td>
-          <td>{{ $book->purchaseDates->purchase_date }}</td>
-          <td><i class="send outline icon"></i></td>
+          @if (!$book->users[0]->pivot->status)
+              <td><i class="send outline icon"></i></td>
+          @else
+              <td><i class="disk outline icon"></i></td>
+          @endif
         </tr>
         @endforeach
-        {{ $books->links() }}
+        {{-- {{ $book->links() }} --}}
       </tbody>
     </table>
   </div>

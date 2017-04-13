@@ -96,25 +96,6 @@
 
             </div>
 
-            <div class="field">
-
-                <label>Purchase Date</label>
-
-                <div class="ui calendar date">
-
-                    <div class="ui input left icon">
-
-                        <i class="calendar icon"></i>
-
-                        <input type="text" name="purchase_date" placeholder="Date">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
              <button class="ui teal submit button" type="submit">Submit</button>
 
         </form>
