@@ -1,4 +1,4 @@
-@extends('admin.dashboard')
+@extends('admin.layouts.dashboard')
 
 @section('admin_content')
 <div class="ui grid container books-list">
