@@ -36,6 +36,7 @@ class BookController extends Controller
         $categories = Category::all();
         // return languages from languages table
         $languages = Language::all();
+
         return view('admin.admin-add-book', compact('categories', 'languages'));
     }
 
@@ -43,11 +44,14 @@ class BookController extends Controller
     {
 
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|string',
             'name' => 'required|string',
-            'category_id' => 'required|numeric',
-            'language_id' => 'required|numeric',
-            'pub_year' => 'required|numeric',
+            'cat_name' => 'required|string',
+            // array(
+            //         'required',
+            //         'regex:/(^([a-zA-z]+)(\d+)?$)/u'
+            //     ),
+            'lang_name' => 'required|string',
         ]);
 
         // this function add new author in author table
@@ -61,13 +65,32 @@ class BookController extends Controller
             $author->save();
         }
 
-        $book = Book::insertGetId([
-            'category_id' => $request->input('category_id'),
-            'edition' => $request->input('edition'),
-            'language_id' =>$request->input('language_id'),
-            'pub_year' => $request->input('pub_year'),
-            'title' => $request->input('title')
+        $category = Category::firstOrNew([
+            'name' => $request->input('cat_name')
         ]);
+
+        if ($category->id == null) {
+            $category->save();
+        }
+
+        $language = Language::firstOrNew([
+            'name' => $request->input('lang_name')
+        ]);
+
+        if ($language->id == null) {
+            $language->save();
+        }
+
+        $book = Book::firstOrNew([
+            'title' => $request->input('title'),
+            'category_id' => $category->id,
+            'language_id' => $language->id
+        ]);
+
+        if ($book->id == null) {
+            $book->save();
+        }
+        // return $book;
 
         $user_id = Auth::user(); // current user id
 
@@ -80,5 +103,19 @@ class BookController extends Controller
 
         return redirect('/dashboard');
 
+    }
+
+    public function bookUpdateCreate()
+    {
+        return view('admin.admin-book-update');
+    }
+
+    public function bookUpdateStore(Request $request)
+    {
+        $this->validate([
+            'category_id' => 'required|numeric',
+            'language_id' => 'required|numeric',
+            'pub_year' => 'required|numeric',
+        ]);
     }
 }

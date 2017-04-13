@@ -29,74 +29,19 @@
 
             </div>
 
-
-			<div class="field">
-				<label>Category</label>
-				<div class="ui search selection dropdown">
-					<input type="hidden" name="category_id">
-					<i class="dropdown icon"></i>
-					<div class="default text">Category</div>
-					<div class="menu">
-
-					@foreach ($categories as $category)
-						<div class="item" data-value={{ $category->id }}>{{ $category->name }}</div>
-					@endforeach
-
-					</div>
-				</div>
-			</div>
+            <div class="field">
+                <label>Category</label>
+                <input type="text" name="cat_name" placeholder="Ex: Art">
+            </div>
 
             <div class="field">
 
                 <label>Language</label>
-
-                <div class="ui selection dropdown">
-
-                    <input type="hidden" name="language_id">
-
-                    <i class="dropdown icon"></i>
-
-                    <div class="default text">Select A Language</div>
-
-                    <div class="menu">
-
-                        @foreach ($languages as $language)
-                            <div class="item" data-value={{ $language->id }}>{{ $language->name }}</div>
-                        @endforeach
-
-                    </div>
-
-                </div>
+                <input type="text" name="lang_name" placeholder="Ex: Bangla">
 
             </div>
 
-            <div class="field">
-
-                <label>Published Year</label>
-
-                <div class="ui calendar" id="year">
-
-                    <div class="ui input left icon">
-
-                        <i class="calendar icon"></i>
-
-                        <input type="text" name="pub_year" placeholder="Date">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="field">
-
-                <label>Edition</label>
-
-                <input type="text" name="edition" placeholder="Ex: 3rd">
-
-            </div>
-
-             <button class="ui teal submit button" type="submit">Submit</button>
+            <button class="ui teal submit button" type="submit">Submit</button>
 
         </form>
 

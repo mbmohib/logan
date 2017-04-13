@@ -15,14 +15,13 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->unique();
-            $table->integer('pub_year');
-            $table->string('edition')->nullable();
+            $table->string('title');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('language_id')->unsigned();
             $table->foreign('language_id')->references('id')->on('languages');
             $table->timestamps();
+            $table->unique(array('title', 'category_id', 'language_id'));
         });
 
         Schema::create('book_user', function (Blueprint $table) {
@@ -32,6 +31,8 @@ class CreateBooksTable extends Migration
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
             $table->boolean('status')->default(true);
+            $table->string('edition')->nullable();
+            $table->integer('pub_year')->nullable();
 
         });
     }
