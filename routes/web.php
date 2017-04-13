@@ -27,10 +27,11 @@ Route::group(['prefix' => 'dashboard'], function () {
     });
 
     Route::get('/add-book', 'BookController@create')->name('add-book');
-
+    Route::get('/book/update/{book}', 'BookController@bookUpdateCreate')->name('book-update-create');
+    Route::post('/book-update', 'BookController@bookUpdateStore')->name('book-update-store');
     Route::post('/add-book', 'BookController@store')->name('store-book');
-
     Route::get('/books', 'BookController@index')->name('show-books');
+    Route::get('/books/{book}', 'BookController@show')->name('show-single-book');
     // Route::get('/books', function ()    {
     //     return view('admin.admin-books-list');
     // });

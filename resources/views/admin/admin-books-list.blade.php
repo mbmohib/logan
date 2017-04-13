@@ -11,6 +11,7 @@
         <th>Category</th>
         <th>Language</th>
         <th>Borrow Status</th>
+        <th>View Details</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +26,11 @@
           @else
               <td><i class="disk outline icon"></i></td>
           @endif
+          <td>
+              <a href="{{ route('show-single-book', ['book' => $book->id])}}">
+                  <i class="external icon"></i>
+              </a>
+          </td>
         </tr>
         @endforeach
         {{-- {{ $book->links() }} --}}

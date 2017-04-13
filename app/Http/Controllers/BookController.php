@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Language;
 use Auth;
+use App\User;
 use Carbon\Carbon;
 
 use \App\Book;
@@ -27,7 +28,16 @@ class BookController extends Controller
                    ->get();
         // return $books[0]->purchaseDates[0]->purchase_date;
         // return $books[1]->users[0]->pivot->status;
+        // return $books[0]->id;
         return view('admin.admin-books-list', compact('books'));
+    }
+
+    public function show(Book $book)
+    {
+        $borrowers = $book->borrowers;
+        // return $borrowers;
+        // return $book;
+        return view('admin.admin-single-book', compact('book', 'borrowers'));
     }
 
     public function create()
@@ -36,6 +46,7 @@ class BookController extends Controller
         $categories = Category::all();
         // return languages from languages table
         $languages = Language::all();
+
         return view('admin.admin-add-book', compact('categories', 'languages'));
     }
 
@@ -43,11 +54,14 @@ class BookController extends Controller
     {
 
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|string',
             'name' => 'required|string',
-            'category_id' => 'required|numeric',
-            'language_id' => 'required|numeric',
-            'pub_year' => 'required|numeric',
+            'cat_name' => 'required|alpha',
+            // array(
+            //         'required',
+            //         'regex:/(^([a-zA-z]+)(\d+)?$)/u'
+            //     ),
+            'lang_name' => 'required|alpha',
         ]);
 
         // this function add new author in author table
@@ -61,13 +75,32 @@ class BookController extends Controller
             $author->save();
         }
 
-        $book = Book::insertGetId([
-            'category_id' => $request->input('category_id'),
-            'edition' => $request->input('edition'),
-            'language_id' =>$request->input('language_id'),
-            'pub_year' => $request->input('pub_year'),
-            'title' => $request->input('title')
+        $category = Category::firstOrNew([
+            'name' => $request->input('cat_name')
         ]);
+
+        if ($category->id == null) {
+            $category->save();
+        }
+
+        $language = Language::firstOrNew([
+            'name' => $request->input('lang_name')
+        ]);
+
+        if ($language->id == null) {
+            $language->save();
+        }
+
+        $book = Book::firstOrNew([
+            'title' => $request->input('title'),
+            'category_id' => $category->id,
+            'language_id' => $language->id
+        ]);
+
+        if ($book->id == null) {
+            $book->save();
+        }
+        // return $book;
 
         $user_id = Auth::user(); // current user id
 
@@ -80,5 +113,32 @@ class BookController extends Controller
 
         return redirect('/dashboard');
 
+    }
+
+    public function bookUpdateCreate($book)
+    {
+        // return $book;
+        return view('admin.admin-book-update', compact('book'));
+    }
+
+    public function bookUpdateStore(Request $request)
+    {
+        $this->validate($request, [
+            'pub_year' => 'required|numeric',
+            'edition' => 'required'
+        ]);
+
+        $book_id = $request->input('book_id');
+        $user_id = Auth::user()->id;
+        // $book = Book::where('id', $book_id)->get();
+        // for updating pivot table according to the user and book id
+        User::find($user_id)->books()->updateExistingPivot($book_id, [
+            'pub_year' => $request->input('pub_year'),
+            'edition' => $request->input('edition')
+        ]);
+
+        $request->session()->flash('status', 'Book updated successfully!');
+
+        return redirect()->route('show-books');
     }
 }
