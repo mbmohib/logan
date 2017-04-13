@@ -29,7 +29,7 @@ class DashboardController extends Controller
                               orderBy('return_date', 'desc')->take(7);
               })->get();
 
-      return view('admin.dashboard', compact(
+      return view('admin.admin-dashboard', compact(
                               'latest_books',
                               'expire_return_books',
                               'upcoming_return_books'

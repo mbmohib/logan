@@ -11,6 +11,7 @@
     <div class="pusher">
         @include('admin.components.header')
 
+		<!--Message after oparetion complete -->
 		@if ($flash = session('status'))
             <div class="ui success message container large">
                 <i class="close icon close_status"></i>
@@ -18,6 +19,7 @@
             </div>
         @endif
 
+		<!--Error message -->
 		@if (count($errors) > 0)
 			<div class="ui negative message container large">
 				<i class="close icon close_status"></i>
