@@ -28,9 +28,10 @@ Route::group(['prefix' => 'dashboard'], function () {
 
     Route::post('/add-book', 'BookController@store')->name('store-book');
 
-    Route::get('/books', function ()    {
-        return view('admin.admin-books-list');
-    });
+    Route::get('/books', 'BookController@index')->name('show-books');
+    // Route::get('/books', function ()    {
+    //     return view('admin.admin-books-list');
+    // });
 
     Route::get('/add-borrower', 'BorrowerController@create');
     Route::post('/add-borrower', 'BorrowerController@store')->name('add-borrower');
