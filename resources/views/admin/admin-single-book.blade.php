@@ -13,47 +13,66 @@
     </h4>
 
     <div class="column">
-        @if (!$book->users[0]->pivot->status)
+        {{-- @if (!$book->users[0]->pivot->status) --}}
             <table class="ui celled definition table">
+              <form class="ui form" action="{{ route('orginal-return-update')}}" method="post">
+
+                {{ csrf_field() }}
+
                 <tbody>
-                    <tr>
-                        <td>Current Borrower</td>
-                        <td>Lorem Ipsumn</td>
-                    </tr>
-                    <tr>
-                        <td>Lend Date</td>
-                        <td>January 11, 2014</td>
-                    </tr>
-                    <tr>
-                        <td>Possible Return Date</td>
-                        <td>May 11, 2014</td>
-                    </tr>
-                    <tr>
-                        <td>Orginal Return Date</td>
-                        <td>
-                            <div class="ui calendar date">
-        	                    <div class="ui input left icon">
-        	                        <i class="calendar icon"></i>
-        	                        <input type="text" placeholder="Date" name="lend_date">
-        	                    </div>
-        	                </div>
-                        </td>
-                    </tr>
+                  @foreach ($borrowers as $borrower)
+                    @if (is_null($borrower->pivot->orginal_return_date))
+                      <tr>
+                          <td>Current Borrower</td>
+                          <td>{{ $borrower->name }}</td>
+                      </tr>
+                      <tr>
+                          <td>Lend Date</td>
+                          <td>{{ $borrower->pivot->lend_date }}</td>
+                      </tr>
+                      <tr>
+                          <td>Possible Return Date</td>
+                          <td>{{ $borrower->pivot->return_date }}</td>
+                      </tr>
+                      <tr>
+                          <td>Orginal Return Date</td>
+                          <td>
+                              <div class="ui calendar date">
+                                <div class="ui input left icon">
+                                    <i class="calendar icon"></i>
+                                    <input type="text" placeholder="Date" name="orginal_return_date">
+                                </div>
+                            </div>
+                          </td>
+                      </tr>
+                      <input type="hidden" name="borrower_id" value="{{ $borrower->pivot->borrower_id}}">
+                      <input type="hidden" name="book_id" value="{{ $borrower->pivot->book_id}}">
+                    @else
+                      <div class="ui segment return_table">
+                          <h3 class="ui header centered horizontal divider">
+                              The Book is in the Shelf!
+                          </h3>
+                          <h1 class="ui header center aligned">
+                              <i class="leanpub icon class"></i>
+                          </h1>
+                      </div>
+                    @endif
+                  @endforeach
                 </tbody>
 
             <tfoot class="full-width">
                 <tr>
                     <th></th>
                     <th colspan="4">
-                        <div class="ui right floated small teal labeled icon button">
+                      <button class="ui right floated small teal labeled icon button">
                         <i class="checkmark icon"></i> Submit
-                    </div>
+                      </button>
                     </th>
                 </tr>
             </tfoot>
-
+          </form>
             </table>
-        @else
+        {{-- @else
             <div class="ui segment return_table">
                 <h3 class="ui header centered horizontal divider">
                     The Book is in the Shelf!
@@ -62,7 +81,7 @@
                     <i class="leanpub icon class"></i>
                 </h1>
             </div>
-        @endif
+        @endif --}}
 
     </div>
 
