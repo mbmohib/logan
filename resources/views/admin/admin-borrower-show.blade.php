@@ -15,7 +15,7 @@
 			<th>Return Date</th>
 			<th>Orginal Return Date</th>
 			<th>Borrow Status</th>
-			<th>Book Returned</th>
+			<th>Book Returned ?</th>
 			</tr>
 		  </thead>
 		  <tbody>

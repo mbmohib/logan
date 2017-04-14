@@ -10,7 +10,7 @@
 
         </div>
 
-        <div class="seven wide column centered">
+        {{-- <div class="seven wide column centered">
             <div class="ui form">
                 <div class="field">
                     <div class="ui search book-search">
@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
 
         <div class="three wide column right floated left aligned">
             <div class="ui secondary  menu">

@@ -35,8 +35,6 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $borrowers = $book->borrowers;
-        // return $borrowers;
-        // return $book;
         return view('admin.admin-single-book', compact('book', 'borrowers'));
     }
 
@@ -131,7 +129,7 @@ class BookController extends Controller
         $book_id = $request->input('book_id');
         $user_id = Auth::user()->id;
         // $book = Book::where('id', $book_id)->get();
-		
+
         // for updating pivot table according to the user and book id
         User::find($user_id)->books()->updateExistingPivot($book_id, [
             'pub_year' => $request->input('pub_year'),
