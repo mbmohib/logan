@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     });
 
     Route::get('/add-book', 'BookController@create')->name('add-book');
-    Route::get('/book/update/{book}', 'BookController@bookUpdateCreate')->name('book-update-create');
+    // Route::get('/book/update/{book}', 'BookController@bookUpdateCreate')->name('book-update-create');
     Route::post('/book-update', 'BookController@bookUpdateStore')->name('book-update-store');
     Route::post('/add-book', 'BookController@store')->name('store-book');
     Route::get('/books', 'BookController@index')->name('show-books');

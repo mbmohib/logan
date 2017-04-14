@@ -55,7 +55,7 @@
 					</div>
 				</div>
 			</div>
-			<button type="submit" class="ui teal submit button"> Sign In </button>
+			<button type="submit" class="ui teal submit button"> Sign Up </button>
 		</form>
 	</div>
 </div>

@@ -2,7 +2,7 @@
 
 @section('admin_content')
 <div class="ui grid container books-list">
-  <div class="thirteen wide column">
+  <div class="thirteen wide centered column">
     <table class="ui celled padded table center aligned">
       <thead>
         <tr>
@@ -38,7 +38,7 @@
     </table>
   </div>
 
-  <div class="three wide column">
+  {{-- <div class="three wide column">
       <div class="ui segments">
 
           <div class="ui segment">
@@ -57,6 +57,6 @@
               <p>Bottom</p>
           </div>
       </div>
-  </div>
+  </div> --}}
 </div>
 @endsection

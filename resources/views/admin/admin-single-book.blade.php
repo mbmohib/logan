@@ -5,10 +5,11 @@
 
 <div class="ui equal width column grid container">
     <h4 class="ui header centered horizontal divider">
-        <a href="{{ route('book-update-create', ['book' => $book->id])}}">
-            Add aditonal info
+        {{-- <a href="{{ route('book-update-create', ['book' => $book->id])}}"> --}}
+
             <i class="edit icon"></i>
-        </a>
+            Aditonal info
+        {{-- </a> --}}
     </h4>
 
     <div class="column">
@@ -97,7 +98,7 @@
 
                 </div>
 
-                <input type="hidden" name="book_id" value="{{ $book }}">
+                <input type="hidden" name="book_id" value="{{ $book->id }}">
 
                 <button class="ui teal submit button right floated small labeled icon" type="submit">
                     <i class="checkmark icon"></i>Submit

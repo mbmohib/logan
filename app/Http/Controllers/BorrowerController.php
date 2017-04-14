@@ -51,29 +51,30 @@ class BorrowerController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'lend_date' => 'required|date|before:today',
+            'lend_date' => 'required|date|before_or_equal:today',
             'return_date' => 'required|date|after_or_equal:lend_date', //Only accept if return date > lend date
             'books' => 'required',
         ]);
 
+        //Get user ID
+        $user_id = Auth::user()->id;
 
         //Find the borrower instance
         $name = $request->input('name');
-        $borrower = Borrower::where('name', $name)->get();
+        $borrower = Borrower::where([['name', $name], ['user_id', $user_id]])->get();
 
-		//Get user ID
-		$user_id = Auth::user()->id;
 
         // To Redirect to Borrower Add Page if not Exist
         $checkEmpty = $borrower;
 
         // Create Borrower if not exist
         if ($borrower->isEmpty()) {
-            $borrower = Borrower::insertGetId([
-                'name' => $request->input('name'),
-                'user_id' => $user_id
-            ]);
-            $borrower = Borrower::where('id', $borrower)->get();
+            $borrower = new Borrower;
+            $borrower->name = $request->input('name');
+            $borrower->user_id = $user_id;
+            $borrower->save();
+
+            $borrower = Borrower::where('id', $borrower->id)->get();
         }
 
 

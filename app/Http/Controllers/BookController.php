@@ -113,11 +113,11 @@ class BookController extends Controller
 
     }
 
-    public function bookUpdateCreate($book)
-    {
-        // return $book;
-        return view('admin.admin-book-update', compact('book'));
-    }
+    // public function bookUpdateCreate($book)
+    // {
+    //     // return $book;
+    //     return view('admin.admin-book-update', compact('book'));
+    // }
 
     public function bookUpdateStore(Request $request)
     {
@@ -127,6 +127,7 @@ class BookController extends Controller
         ]);
 
         $book_id = $request->input('book_id');
+        // dd($book_id);
         $user_id = Auth::user()->id;
         // $book = Book::where('id', $book_id)->get();
 
@@ -138,6 +139,6 @@ class BookController extends Controller
 
         $request->session()->flash('status', 'Book updated successfully!');
 
-        return redirect()->route('show-books');
+        return redirect()->back();
     }
 }
