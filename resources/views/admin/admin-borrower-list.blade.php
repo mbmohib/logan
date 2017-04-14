@@ -2,7 +2,7 @@
 
 @section('admin_content')
 	<div class="ui grid container books-list">
-	  <div class="thirteen wide column">
+	  <div class="thirteen wide column centered">
 	    <table class="ui celled padded table center aligned">
 	      <thead>
 	        <tr>
@@ -45,22 +45,7 @@
 
 	  </div>
 
-	  <div class="three wide column">
-			<div class="ui vertical menu">
-			<a class="active teal item" href="/dashboard/borrowers">
-				Total
-				{{-- <div class="ui teal left pointing label">{{ $total }}</div> --}}
-			</a>
-			<a class="item" href="/dashboard/borrowers?return=true">
-				Returned
-				{{-- <div class="ui label">{{ $return }}</div> --}}
-			</a>
-			<a class="item" href="/dashboard/borrowers?return=false">
-				Not Return
-				{{-- <div class="ui label">{{ $not_return }}</div> --}}
-			</a>
-			</div>
-	      </div>
+
 	  </div>
 	</div>
 @endsection

@@ -7,6 +7,7 @@ use App\Book;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class BorrowerController extends Controller
 {
@@ -17,7 +18,7 @@ class BorrowerController extends Controller
         //Return Book with authentic user
         $books = Book::with('users')
                     ->whereHas('users', function($q) {
-                        $q->where('user_id', Auth::id());
+                        $q->where([['user_id', Auth::id()], ['status', true]]);
                     })
                    ->get();
 
@@ -50,7 +51,7 @@ class BorrowerController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'lend_date' => 'required|date',
+            'lend_date' => 'required|date|before:today',
             'return_date' => 'required|date|after_or_equal:lend_date', //Only accept if return date > lend date
             'books' => 'required',
         ]);
@@ -60,6 +61,9 @@ class BorrowerController extends Controller
         $name = $request->input('name');
         $borrower = Borrower::where('name', $name)->get();
 
+		//Get user ID
+		$user_id = Auth::user()->id;
+
         // To Redirect to Borrower Add Page if not Exist
         $checkEmpty = $borrower;
 
@@ -67,7 +71,7 @@ class BorrowerController extends Controller
         if ($borrower->isEmpty()) {
             $borrower = Borrower::insertGetId([
                 'name' => $request->input('name'),
-                'user_id' => $request->user()->id
+                'user_id' => $user_id
             ]);
             $borrower = Borrower::where('id', $borrower)->get();
         }
@@ -85,12 +89,20 @@ class BorrowerController extends Controller
         $books = $request->input('books');
         $booksToArray = explode(',', $books);
 
-        // Add multiple book to pivot table
+
+
+
+        // Add multiple book to pivot table and update book status
         foreach ($booksToArray as $bookId) {
             $borrower[0]->books()->attach($bookId, [
                 'lend_date' => $fomatted_lend_date,
                 'return_date' => $fomatted_return_date
             ]);
+
+			// for updating pivot table according to the user and book id
+	        User::find($user_id)->books()->updateExistingPivot($bookId, [
+	            'status' => false
+	        ]);
         }
 
 
@@ -117,7 +129,7 @@ class BorrowerController extends Controller
         ]);
 
 
-        $borrower = $borrower = \App\Borrower::all()
+        $borrower = Borrower::all()
                 ->last()
                 ->update([
                     'email' => $request->input('email'),

@@ -22,13 +22,17 @@
 			  @foreach ($books as $book)
 				  <tr>
 				    <td>{{ $book->title }}</td>
-				    <td>Dayle Raees</td>
+				    <td>{{ $book->authors[0]->name }}</td>
 				    <td>{{ $book->category->name }}</td>
 				    <td>{{ $book->pivot->lend_date }}</td>
 				    <td>{{ $book->pivot->return_date }}</td>
+
 					@if ($book->pivot->orginal_return_date)
 						<td>{{ $book->pivot->orginal_return_date }}</td>
+					@else
+						<td>Not Returned Yet</td>
 					@endif
+
 					@if (!$book->pivot->orginal_return_date)
 						<td><i class="send outline icon"></i></td>
 					@else
@@ -36,12 +40,9 @@
 					@endif
 
 				    <td>
-						<div class="inline field">
-					    <div class="ui toggle checkbox">
-					      <input tabindex="0" class="hidden" type="checkbox">
-					      <label>Toggle</label>
-					    </div>
-					  </div>
+						<a href="{{ route('show-single-book', ['book' => $book->id])}}">
+							<i class="external icon"></i>
+						</a>
 					</td>
 				  </tr>
 			  @endforeach
