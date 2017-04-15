@@ -42,7 +42,7 @@ class BorrowerController extends Controller
         //         ['user_id', $request->user()->id]
         //     ])->count();
 
-
+        // return $borrowers;
         return view('admin.admin-borrower-list', compact('borrowers'));
     }
 
