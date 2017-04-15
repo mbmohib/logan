@@ -142,4 +142,12 @@ class BookController extends Controller
 
         return redirect()->back();
     }
+
+    public function bookAjax()
+    {
+      $book = Book::whereHas('users', function($q) {
+                        $q->where('user_id', Auth::id());
+                      })->get();
+      return $book;
+    }
 }

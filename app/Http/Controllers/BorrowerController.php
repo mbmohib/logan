@@ -171,4 +171,9 @@ class BorrowerController extends Controller
       $request->session()->flash('status', 'Borrwer updated successfully!');
       return redirect()->back();
     }
+    public function borrowerAjax()
+    {
+      $borrower = Borrower::where('user_id', Auth::id())->get();
+      return $borrower;
+    }
 }
