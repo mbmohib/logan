@@ -8,6 +8,7 @@ use App\Language;
 use Auth;
 use App\User;
 use Carbon\Carbon;
+use DB;
 
 use \App\Book;
 use \App\Author;
@@ -78,7 +79,8 @@ class BookController extends Controller
             'name' => $request->input('cat_name')
         ]);
 
-        if ($category->id == null) {
+        if ($category->id == null)
+        {
             $category->save();
         }
 
@@ -86,7 +88,8 @@ class BookController extends Controller
             'name' => $request->input('lang_name')
         ]);
 
-        if ($language->id == null) {
+        if ($language->id == null)
+        {
             $language->save();
         }
 
@@ -96,21 +99,45 @@ class BookController extends Controller
             'language_id' => $language->id
         ]);
 
-        if ($book->id == null) {
+        if ($book->id == null)
+        {
             $book->save();
         }
-        // return $book;
 
-        $user_id = Auth::user(); // current user id
+        $author_book_pivot = DB::table('author_book')->where([
+            ['author_id', '=', $author->id],
+            ['book_id', '=', $book->id],
+        ])->get();
 
-        $author->books()->attach($book); // inserting data in the pivot table
+        if ($author_book_pivot == null)
+        {
+            $author->books()->attach($book); // inserting data in the pivot table
+        }
+
+        $user = Auth::user(); // current user instance
+
+        $book_user_pivot = DB::table('book_user')->where([
+            ['user_id', '=', $user->id],
+            ['book_id', '=', $book->id],
+        ])->get();
+
+        if ($book_user_pivot == null)
+        {
+
+            $user_id->books()->attach($book);
+
+            // for success notification
+            $request->session()->flash('status', 'Book added successfully!');
+
+            return redirect('/dashboard');
+        }
+        else
+        {
+            $request->session()->flash('status', 'Book is already added in the shelf!');
+            return redirect('/dashboard');
+        }
+
         // $book->users()->attach($user_id);
-        $user_id->books()->attach($book);
-
-        // for success notification
-        $request->session()->flash('status', 'Book added successfully!');
-
-        return redirect('/dashboard');
 
     }
 
