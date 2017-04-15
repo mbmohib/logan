@@ -10,8 +10,8 @@
 					 <div class="item">
  						<i class="book icon"></i>
  						<div class="content">
- 							{{ $latest_book->title }}
- 						</div>
+ 							<a href="{{ route('show-single-book', ['book' => $latest_book->id])}}">{{ $latest_book->title }}</a>
+	 						</div>
  					</div>
 	  			  	@endforeach
 				</div>
@@ -27,7 +27,7 @@
 							<div class="item">
 	    						<i class="book icon"></i>
 	    						<div class="content">
-	    							{{ $upcoming_return_book->title }}
+										<a href="{{ route('show-single-book', ['book' => $upcoming_return_book->id])}}">{{ $upcoming_return_book->title }}</a>
 	    						</div>
 	    					</div>
 					 @endforeach
@@ -44,7 +44,7 @@
 							<div class="item">
 	    						<i class="book icon"></i>
 	    						<div class="content">
-	    							{{ $expire_return_book->title }}
+										<a href="{{ route('show-single-book', ['book' => $expire_return_book->id])}}">{{ $expire_return_book->title }}</a>
 	    						</div>
 	    					</div>
 		  		      @endforeach
