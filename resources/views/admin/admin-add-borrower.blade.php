@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 
 @section('admin_content')
-
+<script src="/js/jquery.min.js"></script>
 
 	<div class="ui grid container">
 	    <div class="eight wide centered column">
@@ -61,4 +61,35 @@
 	        </form>
 	    </div>
 	</div>
+	<script>
+	// Check console to see the values of Borrower. Use these value to show in search bar.
+		$(document).ready(function() {
+			$.ajax({
+				method: 'GET',
+				url: 'borrower-ajax',
+				dataType: 'json'
+			}).done(function(data){
+				console.log(data);
+				$.map(data, function(key, value){
+					console.log(key.id + " - " + key.name + " - " + key.mobile + " - " + key.email);
+				});
+			});
+		});
+	</script>
+	<script>
+	// Check console to see the values of Books. Use these value to show in search bar.
+		$(document).ready(function() {
+			$.ajax({
+				method: 'GET',
+				url: 'book-ajax',
+				dataType: 'json'
+			}).done(function(data){
+				console.log(data);
+				$.map(data, function(key, value){
+					console.log(key.id + " - " + key.title);
+				});
+			});
+		});
+	</script>
+
 @endsection

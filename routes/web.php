@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::post('/add-book', 'BookController@store')->name('store-book');
     Route::get('/books', 'BookController@index')->name('show-books');
     Route::get('/books/{book}', 'BookController@show')->name('show-single-book');
+    Route::get('/book-ajax','BookController@bookAjax');
     // Route::get('/books', function ()    {
     //     return view('admin.admin-books-list');
     // });
@@ -43,6 +44,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/borrower-update', 'BorrowerController@borrowerUpdateCreate')->name('borrower-update');
     Route::post('/borrower-update', 'BorrowerController@borrowerUpdate')->name('borrower-update');
     Route::post('/borrower-lend-update', 'BorrowerController@AddOrginalReturnDate')->name('orginal-return-update');
+    Route::get('/borrower-ajax','BorrowerController@borrowerAjax')->name('borrower-ajax');
 
 });
 

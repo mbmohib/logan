@@ -13,7 +13,7 @@
     </h4>
 
     <div class="column">
-        {{-- @if (!$book->users[0]->pivot->status) --}}
+        @if (!$book->users[0]->pivot->status)
             <table class="ui celled definition table">
               <form class="ui form" action="{{ route('orginal-return-update')}}" method="post">
 
@@ -48,14 +48,22 @@
                       <input type="hidden" name="borrower_id" value="{{ $borrower->pivot->borrower_id}}">
                       <input type="hidden" name="book_id" value="{{ $borrower->pivot->book_id}}">
                     @else
-                      <div class="ui segment return_table">
-                          <h3 class="ui header centered horizontal divider">
-                              The Book is in the Shelf!
-                          </h3>
-                          <h1 class="ui header center aligned">
-                              <i class="leanpub icon class"></i>
-                          </h1>
-                      </div>
+                      <tr>
+                          <td>Current Borrower</td>
+                          <td>{{ $borrower->name }}</td>
+                      </tr>
+                      <tr>
+                          <td>Lend Date</td>
+                          <td>{{ $borrower->pivot->lend_date }}</td>
+                      </tr>
+                      <tr>
+                          <td>Possible Return Date</td>
+                          <td>{{ $borrower->pivot->return_date }}</td>
+                      </tr>
+                      <tr>
+                          <td>Orginal Return Date</td>
+                          <td>{{ $borrower->pivot->orginal_return_date }}</td>
+                      </tr>
                     @endif
                   @endforeach
                 </tbody>
@@ -72,7 +80,7 @@
             </tfoot>
           </form>
             </table>
-        {{-- @else
+        @else
             <div class="ui segment return_table">
                 <h3 class="ui header centered horizontal divider">
                     The Book is in the Shelf!
@@ -81,7 +89,7 @@
                     <i class="leanpub icon class"></i>
                 </h1>
             </div>
-        @endif --}}
+        @endif
 
     </div>
 
