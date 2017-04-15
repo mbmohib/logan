@@ -33,6 +33,7 @@ class CreateBooksTable extends Migration
             $table->boolean('status')->default(true);
             $table->string('edition')->nullable();
             $table->integer('pub_year')->nullable();
+            $table->unique(array('user_id', 'book_id'));
 
         });
     }

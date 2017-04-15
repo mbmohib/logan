@@ -25,6 +25,7 @@ class CreateAuthorsTable extends Migration
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+            $table->unique(array('author_id', 'book_id'));
 
         });
     }
