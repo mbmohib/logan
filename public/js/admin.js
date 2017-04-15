@@ -52,18 +52,21 @@ $(".close_status").click(function(){
 $('.ui.checkbox')
   .checkbox()
 ;
-//--------- Borrower Search and Add----------------
-var
-  content = [
-    {
-      title: 'Maruf Hasan',
-      description: '01711981813',
-    },
-    {
-      title: 'Nurshad Rahman',
-      description: '01942614856',
-    }
-  ];
+// --------- Borrower Search and Add----------------
+
+var content = new Array();
+	$.ajax({
+		method: 'GET',
+    async: false,
+		url: 'borrower-ajax',
+		dataType: 'json'
+	}).done(function(data){
+		$.map(data, function(key, value){
+      content.push({title : key.name, description : key.mobile});
+		});
+	});
+
+console.log(content);
 
 $('.ui.search')
   .search({
