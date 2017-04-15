@@ -17,14 +17,14 @@ class DashboardController extends Controller
 
       $expire_return_books = Book::whereHas('borrowers', function($q){
                               $q->where('user_id', Auth::id())->
-                              whereDate("return_date",'<', date('Y-m-d'))->
+                              whereDate("return_date",'<',date('Y-m-d'))->
                               whereNull("orginal_return_date")->
                               orderBy('return_date', 'ASC')->take(7);
               })->get();
 
       $upcoming_return_books = Book::whereHas('borrowers', function($q){
                               $q->where('user_id', Auth::id())->
-                              whereDate("return_date",'>=', date('Y-m-d'))->
+                              whereDate("return_date",'>=',date('Y-m-d'))->
                               whereNull("orginal_return_date")->
                               orderBy('return_date', 'desc')->take(7);
               })->get();

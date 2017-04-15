@@ -35,8 +35,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $borrowers = $book->borrowers;
-        return view('admin.admin-single-book', compact('book','borrowers'));
-
+        return view('admin.admin-single-book', compact('book', 'borrowers'));
     }
 
     public function create()
