@@ -107,9 +107,11 @@ class BookController extends Controller
         $author_book_pivot = DB::table('author_book')->where([
             ['author_id', '=', $author->id],
             ['book_id', '=', $book->id],
-        ])->get();
+        ])->count();
 
-        if ($author_book_pivot == null)
+        // return $author_book_pivot;
+
+        if ($author_book_pivot == 0)
         {
             $author->books()->attach($book); // inserting data in the pivot table
         }
@@ -119,12 +121,12 @@ class BookController extends Controller
         $book_user_pivot = DB::table('book_user')->where([
             ['user_id', '=', $user->id],
             ['book_id', '=', $book->id],
-        ])->get();
+        ])->count();
 
-        if ($book_user_pivot == null)
+        if ($book_user_pivot == 0)
         {
 
-            $user_id->books()->attach($book);
+            $user->books()->attach($book);
 
             // for success notification
             $request->session()->flash('status', 'Book added successfully!');
@@ -133,8 +135,8 @@ class BookController extends Controller
         }
         else
         {
-            $request->session()->flash('status', 'Book is already added in the shelf!');
-            return redirect('/dashboard');
+            $request->session()->flash('status', 'This book is already exist in the shelf!');
+            return redirect()->back();
         }
 
         // $book->users()->attach($user_id);

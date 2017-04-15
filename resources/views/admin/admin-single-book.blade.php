@@ -3,6 +3,36 @@
 @section('admin_content')
 <h1 class="ui header centered horizontal divider">{{ $book->title }}</h1>
 
+<div class="ui grid container books-list">
+  <div class="thirteen wide centered column">
+    <table class="ui celled padded table center aligned">
+      <thead>
+        <tr>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Language</th>
+        <th>Borrow Status</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>{{ $book->authors[0]->name }}</td>
+          <td>{{ $book->category->name }}</td>
+          <td>{{ $book->language->name }}</td>
+          @if (!$book->users[0]->pivot->status)
+              <td><i class="send outline icon"></i></td>
+          @else
+              <td><i class="disk outline icon"></i></td>
+          @endif
+        </tr>
+
+        {{-- {{ $book->links() }} --}}
+      </tbody>
+    </table>
+  </div>
+  </div>
+
 <div class="ui equal width column grid container">
     <h4 class="ui header centered horizontal divider">
         {{-- <a href="{{ route('book-update-create', ['book' => $book->id])}}"> --}}
