@@ -8,8 +8,8 @@
         <!-- Latest compiled and minified CSS -->
         @section('stylesheet')
 
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.7/calendar.min.css">
+      <link rel="stylesheet" href="/semantic/semantic.min.css">
+			<link rel="stylesheet" href="/semantic/calendar.min.css">
     		<link rel="stylesheet" href="/css/animate.css" charset="utf-8">
     		<link rel="stylesheet" href="/css/hover.css" charset="utf-8">
             <link rel="stylesheet" href="/css/admin.css">
@@ -25,7 +25,7 @@
         ]) !!};
     </script>
     <body>
-        
+
         {{-- <div class="ui bottom attached segment pushable"> --}}
             @yield('content')
         {{-- </div> --}}
@@ -33,8 +33,8 @@
 	{{-- Javascript Files --}}
     @section('javascript')
     	<script src="/js/jquery.min.js"></script>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui-calendar/0.0.7/calendar.min.js"></script>
+    	<script src="/semantic/semantic.min.js"></script>
+    	<script src="/semantic/calendar.min.js"></script>
     	<script src="/js/admin.js"></script>
     @show
 	</body>
