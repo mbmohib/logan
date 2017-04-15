@@ -47,23 +47,6 @@
                       </tr>
                       <input type="hidden" name="borrower_id" value="{{ $borrower->pivot->borrower_id}}">
                       <input type="hidden" name="book_id" value="{{ $borrower->pivot->book_id}}">
-                    @else
-                      <tr>
-                          <td>Current Borrower</td>
-                          <td>{{ $borrower->name }}</td>
-                      </tr>
-                      <tr>
-                          <td>Lend Date</td>
-                          <td>{{ $borrower->pivot->lend_date }}</td>
-                      </tr>
-                      <tr>
-                          <td>Possible Return Date</td>
-                          <td>{{ $borrower->pivot->return_date }}</td>
-                      </tr>
-                      <tr>
-                          <td>Orginal Return Date</td>
-                          <td>{{ $borrower->pivot->orginal_return_date }}</td>
-                      </tr>
                     @endif
                   @endforeach
                 </tbody>

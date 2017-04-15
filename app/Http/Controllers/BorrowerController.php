@@ -160,10 +160,17 @@ class BorrowerController extends Controller
 
       $borrower_id = $request->input('borrower_id');
       $book_id = $request->input('book_id');
+      $user_id = Auth::user()->id;
       $orginal_return_date = Carbon::parse($request->input('orginal_return_date'))->format('Y-m-d');
 
       Borrower::find($borrower_id)->books()->updateExistingPivot
       ($book_id, ['orginal_return_date' => $orginal_return_date]);
+
+      User::find($user_id)->books()->updateExistingPivot($book_id, [
+          'status' => 1,
+      ]);
+
+
 
       // return Borrower::where('borrower_id','=', 'borrower_id')->books()->updateExistingPivot
       // ($borrower_id, ['orginal_return_date' => $orginal_return_date]);
