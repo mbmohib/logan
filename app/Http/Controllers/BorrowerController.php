@@ -150,25 +150,4 @@ class BorrowerController extends Controller
         $books = $borrower->books;
         return view('admin.admin-borrower-show', compact('borrower', 'books'));
     }
-
-    public function AddOrginalReturnDate(Request $request)
-    {
-      // return $request->all();
-      $this->validate($request, [
-        'orginal_return_date' => 'required|after_or_equal:today'
-      ]);
-
-      $borrower_id = $request->input('borrower_id');
-      $book_id = $request->input('book_id');
-      $orginal_return_date = Carbon::parse($request->input('orginal_return_date'))->format('Y-m-d');
-
-      Borrower::find($borrower_id)->books()->updateExistingPivot
-      ($book_id, ['orginal_return_date' => $orginal_return_date]);
-
-      // return Borrower::where('borrower_id','=', 'borrower_id')->books()->updateExistingPivot
-      // ($borrower_id, ['orginal_return_date' => $orginal_return_date]);
-
-      $request->session()->flash('status', 'Borrwer updated successfully!');
-      return redirect()->back();
-    }
 }

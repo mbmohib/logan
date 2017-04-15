@@ -28,7 +28,7 @@ class Book extends Model
     public function borrowers()
     {
         //return with extra column in pivot table
-        return $this->belongsToMany(Borrower::class)->withPivot('borrower_id', 'book_id','lend_date', 'return_date', 'orginal_return_date');
+        return $this->belongsToMany(Borrower::class)->withPivot('lend_date', 'return_date', 'orginal_return_date');
     }
 
     public function category()

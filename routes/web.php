@@ -42,7 +42,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/borrowers/{borrower}', 'BorrowerController@show')->name('borrower-show');
     Route::get('/borrower-update', 'BorrowerController@borrowerUpdateCreate')->name('borrower-update');
     Route::post('/borrower-update', 'BorrowerController@borrowerUpdate')->name('borrower-update');
-    Route::post('/borrower-lend-update', 'BorrowerController@AddOrginalReturnDate')->name('orginal-return-update');
 
 });
 
