@@ -11,7 +11,7 @@
 			</div>
 			@if ($errors->has('email'))
 				<div class="ui error message">
-					<strong>{{ $errors->login->first('email') }}</strong>
+					<strong>{{ $errors->first('email') }}</strong>
 				</div>
 			@endif
 			<div class="field{{ $errors->has('password') ? ' has-error' : '' }}">

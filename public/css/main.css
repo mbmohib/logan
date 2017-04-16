@@ -1,8 +1,14 @@
 /*------------ Font Import--------------
 ---------------------------------------------*/
+@font-face {
+    font-family: 'Poppins';
+    src:  url('/fonts/Poppins-Regular.ttf');
+}
 
-@import url('https://fonts.googleapis.com/css?family=Macondo');
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+@font-face {
+    font-family: 'Macondo';
+    src:  url('/fonts/Macondo-Regular.ttf');
+}
 
 /*------------ Global Section--------------
 ---------------------------------------------*/
@@ -30,8 +36,11 @@ input {
 	font-family: 'Macondo', cursive;
 }
 .logo img {
-	width: 32px;
-	height: 32px;
+	width: 38px;
+	height: 38px;
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 .logo span {
 	display: block;
@@ -61,7 +70,7 @@ input {
 ---------------------------------------------*/
 .login {
 	background: #1F2021;
-	min-height: 330px;
+	min-height: 380px;
 }
 .login .header {
 	padding-top: 70px;
@@ -80,8 +89,8 @@ input {
 /*------------ Footer Section--------------
 ---------------------------------------------*/
 .footer {
-	background: #1F2021;
-	height: 100px;
+	background: #fff;
+	height: 150px;
 }
 section.footer {
 	margin-bottom: 0em;

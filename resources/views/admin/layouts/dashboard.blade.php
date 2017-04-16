@@ -39,25 +39,12 @@
         <footer>
             <div class="ui centered grid wow slideInUp">
                 <div class="row">
-                    <div class="five wide column">
-                        <div class="ui form">
-                            <div class="field">
-                                <div class="ui action input">
-                                    <input type="email" placeholder="batman@batcave.com">
-                                    <button class="ui teal right labeled icon button">
-                                        <i class="announcement icon"></i>
-                                        Tell Your Friends
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="column center aligned">
+						<div class="copyright">
+		                    <a href="#">&copy; Maruf, Mohib, Momit</a>
+		                </div>
                     </div>
                 </div>
-
-                <div class="copyright">
-                    <a href="#">&copy; Maruf, Mohib, Momit</a>
-                </div>
-
             </div>
         </footer>
     </div>
