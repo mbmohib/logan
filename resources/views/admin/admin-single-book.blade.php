@@ -38,7 +38,7 @@
         {{-- <a href="{{ route('book-update-create', ['book' => $book->id])}}"> --}}
 
             <i class="edit icon"></i>
-            Aditonal info
+            Additonal info
         {{-- </a> --}}
     </h4>
 
