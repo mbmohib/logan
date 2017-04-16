@@ -35,13 +35,10 @@
 		<div class="bannar_info wow fadeIn">
 			<div class="ui grid">
 				<div class="five wide right floated column">
-					<h1 class="ui header inverted">Store your BOOK!</h1>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						Ut enim ad minim veniam, quis nostrud exercitation ullamco,
-						laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-						Excepteur sint occaecat cupidatat non proident,
-						sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<h1 class="ui header inverted">Keep track your BOOK!</h1>
+					<p>Here you can create your personal virtual library to keep track your physical books.
+						You can also track books you lended to other people.
+						It's easy to use and save lots of time managing your books.
 					</p>
 				</div>
 			</div>
@@ -56,27 +53,21 @@
 				<i class="sign in icon"></i>
 				<span>Registration</span>
 				<p>
-					lorem ipsum dolar sitsed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua.
-					Ut enim ad minim veniam, quis nostrud exer
+					Register with your name and email.
 				</p>
 			</div>
 			<div class="column">
 				<i class="book icon"></i>
 				<span>Add Book</span>
 				<p>
-					lorem ipsum dolar sitsed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua.
-					Ut enim ad minim veniam, quis nostrud exer
+					Add your books to your personal virtual library.
 				</p>
 			</div>
 			<div class="column">
-				<i class="add user icon"></i>
-				<span>Add Borrower</span>
+				<i class="exchange icon"></i>
+				<span>Lend Books</span>
 				<p>
-					lorem ipsum dolar sitsed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua.
-					Ut enim ad minim veniam, quis nostrud exer
+					Lend your books to borrower and you can easily track it.
 				</p>
 			</div>
 		</div>

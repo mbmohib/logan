@@ -34,9 +34,13 @@
 					@endif
 
 					@if (!$book->pivot->orginal_return_date)
-						<td><i class="send outline icon"></i></td>
+						<td>
+							Lent To Borrower
+						</td>
 					@else
-						<td><i class="disk outline icon"></i></td>
+						<td>
+							In the Shelf
+						</td>
 					@endif
 
 				    <td>

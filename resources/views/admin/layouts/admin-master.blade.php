@@ -13,6 +13,8 @@
     		<link rel="stylesheet" href="/css/animate.css" charset="utf-8">
     		<link rel="stylesheet" href="/css/hover.css" charset="utf-8">
             <link rel="stylesheet" href="/css/admin.css">
+            <link href="/fonts/MerriweatherSans-LightItalic.ttf" rel="stylesheet">
+            <link href="/fonts/BadScript-Regular.ttf" rel="stylesheet">
 
         @show
 
