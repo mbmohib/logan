@@ -4,7 +4,7 @@
 	<div class="ui three column grid container">
 		<div class="column">
 
-			  <h3 class="ui header centered horizontal divider">Latest Added Books</h3>
+			  <h3 class="ui header centered horizontal divider">Recently Added</h3>
 				<div class="ui list">
 					@foreach ($latest_books as $latest_book)
 					 <div class="item">
@@ -38,7 +38,8 @@
 
 		<div class="column">
 
-		      <h3 class="ui header centered horizontal divider">Return Date Expired Books</h3>
+		      <h3 class="ui header centered horizontal divider"> Expire Return Book</h3>
+
 			  		<div class="ui list">
 						@foreach ($expire_return_books as $expire_return_book)
 							<div class="item">
