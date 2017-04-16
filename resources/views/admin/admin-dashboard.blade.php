@@ -38,7 +38,7 @@
 
 		<div class="column">
 
-		      <h3 class="ui header centered horizontal divider"> Expire Return Date Books</h3>
+		      <h3 class="ui header centered horizontal divider">Return Date Expired Books</h3>
 			  		<div class="ui list">
 						@foreach ($expire_return_books as $expire_return_book)
 							<div class="item">
