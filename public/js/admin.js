@@ -17,6 +17,10 @@ $('.ui.modal').modal({
   observeChanges:true
 });
 
+$('.ui.basic.modal')
+  .modal('show')
+;
+
 $(".view_book").click(function(){
   $('.ui.modal.v_book').modal('show');
 });

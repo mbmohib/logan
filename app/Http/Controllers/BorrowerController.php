@@ -125,8 +125,8 @@ class BorrowerController extends Controller
 	public function borrowerUpdate(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required',
-            'mobile' => 'required',
+            'email' => 'required|email',
+            'mobile' => 'required|numeric|digits:11',
         ]);
 
 
