@@ -10,7 +10,7 @@ body {
 	font-family: 'Poppins', sans-serif !important;
 }
 
-section {
+.process {
 	margin-top: 5em;
 	margin-bottom: 5em;
 }
@@ -61,7 +61,7 @@ input {
 ---------------------------------------------*/
 .login {
 	background: #1F2021;
-	min-height: 500px;
+	min-height: 330px;
 }
 .login .header {
 	padding-top: 70px;
@@ -69,11 +69,19 @@ input {
 .login label {
 	color: #fff !important;
 }
+/*------------ Registration Section--------------
+---------------------------------------------*/
+.register .signup {
+	padding-top: 100px;
+	color: #fff !important;
+	background: #fff;
+	height: 1000px;
+}
 /*------------ Footer Section--------------
 ---------------------------------------------*/
 .footer {
 	background: #1F2021;
-	height: 250px;
+	height: 100px;
 }
 section.footer {
 	margin-bottom: 0em;

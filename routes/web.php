@@ -1,17 +1,15 @@
 <?php
 
+Auth::routes();
 
+
+// Welcome Section
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test', function () {
-    $borrower = \App\Borrower::all()->last();
-    return $borrower;
+Route::get('/registration', function() {
+	return view('register');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
 
 
 //Dashboard Panel Route:

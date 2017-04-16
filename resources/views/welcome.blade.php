@@ -12,24 +12,7 @@
 <div class="pusher">
 	<div id="home" class="ui vertical aligned center segment inverted header_bannar">
 		<div class="ui container">
-			<div class="ui secondary inverted top large pointing menu">
-				<div class="left item">
-					<a href="#">
-						{{-- <i class="sidebar icon tablet"></i> --}}
-					</a>
-					<a href="#" class="logo">
-						<img src="/images/logo.png" alt="">
-						<span>BookShelf</span>
-					</a>
-				</div>
-
-				<div class="right item">
-					<a href="/" class="active item">Home</a>
-					<a href="#process" class="item">Process</a>
-					<a href="#login" class="item">Login</a>
-					<a href="#signup" class="item">Registration</a>
-				</div>
-			</div>
+			@include('components.nav')
 		</div>
 
 		<div class="bannar_info wow fadeIn">
@@ -77,38 +60,7 @@
 		@include('components.login')
 	</section>
 
-	<section id="signup" class="signup">
-		@include('components.register')
-	</section>
-
-	<section class="footer">
-
-		<div class="ui centered grid wow slideInUp">
-			<div class="row">
-				<div class="five wide column">
-					<div class="ui form">
-						<div class="field">
-							<div class="ui action input">
-								<input type="email" placeholder="batman@batcave.com">
-								<button class="ui teal right labeled icon button">
-									<i class="announcement icon"></i>
-									Tell Your Friends
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="copyright">
-				<a href="#">&copy; Maruf, Mohib, Momit</a>
-			</div>
-
-		</div>
-
-		<a class="up-arrow" href="#home"><i class="arrow circle up icon"></i></a>
-
-	</section>
+	@include('components.footer')
 </div>
 
 @endsection
