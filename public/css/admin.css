@@ -1,10 +1,29 @@
+@font-face {
+    font-family: 'Merriweather Sans';
+    src:  url('/fonts/MerriweatherSans-LightItalic.ttf');
+}
 
-@import url('https://fonts.googleapis.com/css?family=Spirax');
+@font-face {
+    font-family: 'Bad Script';
+    src:  url('/fonts/BadScript-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Antic';
+    src:  url('/fonts/Antic-Regular.ttf');
+}
+
+label {
+    font-family: 'Antic', cursive !important;
+}
 body {
     background: #fff;
 }
+table th {
+    font-family: 'Merriweather Sans', cursive !important;
+}
 .header {
-	font-family: 'Spirax', cursive !important;
+    font-family: 'Bad Script', cursive !important;
     margin-top: 50px !important;
 }
 .logo {
@@ -36,7 +55,6 @@ body {
 }
 .dashboard_title {
     padding-top: 18px !important;
-    font-family: 'Spirax', cursive;
     font-size: 22px;
 }
 .dashboard_title a span {

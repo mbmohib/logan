@@ -22,9 +22,14 @@
           <td>{{ $book->category->name }}</td>
           <td>{{ $book->language->name }}</td>
           @if (!$book->users[0]->pivot->status)
-              <td><i class="send outline icon"></i></td>
+              <td>
+
+          Lent To Borrower
+			  </td>
           @else
-              <td><i class="disk outline icon"></i></td>
+              <td>
+				  In the Shelf
+			  </td>
           @endif
           <td>
               <a href="{{ route('show-single-book', ['book' => $book->id])}}">

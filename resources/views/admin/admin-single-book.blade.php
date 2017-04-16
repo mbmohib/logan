@@ -21,9 +21,15 @@
           <td>{{ $book->category->name }}</td>
           <td>{{ $book->language->name }}</td>
           @if (!$book->users[0]->pivot->status)
-              <td><i class="send outline icon"></i></td>
+              <td>
+                <i class="send outline icon"></i>
+                Lent To Borrower
+              </td>
           @else
-              <td><i class="disk outline icon"></i></td>
+              <td>
+                <i class="disk outline icon"></i>
+                In the Shelf
+              </td>
           @endif
         </tr>
 
@@ -38,7 +44,7 @@
         {{-- <a href="{{ route('book-update-create', ['book' => $book->id])}}"> --}}
 
             <i class="edit icon"></i>
-            Aditonal info
+            Additional info
         {{-- </a> --}}
     </h4>
 
@@ -194,11 +200,8 @@
           <td>{{ $borrower->pivot->lend_date }}</td>
           @if ($borrower->pivot->orginal_return_date)
               <td>{{ $borrower->pivot->orginal_return_date }}</td>
-          @endif
-          @if (!$borrower->pivot->orginal_return_date)
-              <td><i class="send outline icon"></i></td>
           @else
-              <td><i class="disk outline icon"></i></td>
+              <td>Book Not Returned Yet!</td>
           @endif
           <td class="view_book">
               <a href="{{ route('borrower-show', ['borrower' => $borrower->id])}}">

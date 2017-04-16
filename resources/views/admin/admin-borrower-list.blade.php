@@ -9,7 +9,7 @@
 	        <th>Name</th>
 	        <th>Email</th>
 	        <th>Mobile</th>
-			<th>Borrow Status</th>
+			{{-- <th>Borrow Status</th> --}}
 			<th>View Details</th>
 
 	        </tr>
@@ -22,13 +22,13 @@
 			          <td>{{ $borrower->name }}</td>
 			          <td>{{ $borrower->email }}</td>
 			          <td>{{ $borrower->mobile }}</td>
-					  <td>
+					  {{-- <td>
 						@if ($borrower->status)
 						  	<i class="send outline icon"></i>
 						@else
 							<i class="icon"></i>
 						@endif
-					  </td>
+					  </td> --}}
 					  <td class="view_book">
 						  <a href="{{ route('borrower-show', ['borrower' => $borrower->id])}}">
 						  	  <i class="external icon"></i>
