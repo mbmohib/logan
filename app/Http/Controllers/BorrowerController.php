@@ -129,13 +129,32 @@ class BorrowerController extends Controller
             'mobile' => 'required|numeric|digits:11',
         ]);
 
+        $checkMobile = Borrower::where([
+            ['mobile', $request->input('mobile')],
+            ['user_id', $request->user()->id]
+        ])->get();
 
-        $borrower = Borrower::all()
-                ->last()
-                ->update([
-                    'email' => $request->input('email'),
-                    'mobile' => $request->input('mobile'),
-                ]);
+        $checkEmail = Borrower::where([
+            ['email', $request->input('email')],
+            ['user_id', $request->user()->id]
+        ])->get();
+
+        if (!$checkMobile->isEmpty()) {
+            $request->session()->flash('error', 'Mobile No Already Exist!');
+            return redirect()->back();
+        }
+
+        if (!$checkEmail->isEmpty()) {
+            $request->session()->flash('error', 'Email Already Exist!');
+            return redirect()->back();
+        }
+
+        Borrower::all()
+            ->last()
+            ->update([
+                'email' => $request->input('email'),
+                'mobile' => $request->input('mobile'),
+            ]);
 
 
 

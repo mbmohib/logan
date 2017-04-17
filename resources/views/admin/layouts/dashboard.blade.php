@@ -19,6 +19,14 @@
             </div>
         @endif
 
+		<!--Custom Error Message after oparetion complete -->
+		@if ($flash = session('error'))
+            <div class="ui negative message container large">
+                <i class="close icon close_status"></i>
+                <p><i class="warning icon"></i>{{ $flash }}</p>
+            </div>
+        @endif
+
 		<!--Error message -->
 		@if (count($errors) > 0)
 			<div class="ui negative message container large">

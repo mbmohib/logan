@@ -3,7 +3,7 @@
 		<a href="#">
 			{{-- <i class="sidebar icon tablet"></i> --}}
 		</a>
-		<a href="#" class="logo">
+		<a href="/" class="logo">
 			<img src="/images/logo.png" alt="">
 			<span>BookShelf</span>
 		</a>
