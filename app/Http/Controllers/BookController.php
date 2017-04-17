@@ -135,7 +135,7 @@ class BookController extends Controller
         }
         else
         {
-            $request->session()->flash('status', 'This book is already exist in the shelf!');
+            $request->session()->flash('error', 'This book is already exist in the shelf!');
             return redirect()->back();
         }
 
